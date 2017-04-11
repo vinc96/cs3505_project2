@@ -11,18 +11,18 @@ namespace CS3505
 
   public:
     /*
-     * Starts our server. 
+     * Starts our server.
      * Returns true if our server is started, false otherwise.
      */
-    bool start();  
+    bool start();
 
     /*
-     * Tells the server to save all data to disk, disconnect clients, close the socket, 
+     * Tells the server to save all data to disk, disconnect clients, close the socket,
      * and shut down the server.
      * Returns true if the server shut down gracefully, false otherwise.
      */
     bool stop();
-    
+
     /*
      * Returns true if the server is currently running, false otherwise.
      */

@@ -6,7 +6,7 @@ using namespace CS3505;
 
 bool server::start()
 {
-  return true; //Placeholder 
+  return true; //Placeholder
 }
 
 bool server::stop()

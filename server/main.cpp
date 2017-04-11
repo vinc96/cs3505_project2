@@ -4,7 +4,7 @@
 #include <iostream>
 
 using namespace CS3505;
-using namespace std; 
+using namespace std;
 
 /*
  * Launches a spreadsheet server, operating on the RAD protocol, that saves all incoming data,
@@ -18,7 +18,7 @@ int main ()
   if (our_server.start())
     {
       cout << "Server Started Successfully" << endl;
-    } 
+    }
   //Listen for console commands.
   string command;
   while (our_server.is_running())
@@ -26,19 +26,19 @@ int main ()
       cin >> command;
       //If we recieved a shutdown command.
       if (command == "shutdown")
-	{
-	  cout << "Server shutting down..." << endl;
-	  if (our_server.stop())
-	    {
-	      cout << "Server shutdown gracefully" << endl;
-	      return 0;
-	    }
-	  else
-	    {
-	      cout << "Server didn't shutdown gracefully" << endl;
-	      return 1; //We encountered an error state.
-	    }
-	}
+        {
+          cout << "Server shutting down..." << endl;
+          if (our_server.stop())
+            {
+              cout << "Server shutdown gracefully" << endl;
+              return 0;
+            }
+          else
+            {
+              cout << "Server didn't shutdown gracefully" << endl;
+              return 1; //We encountered an error state.
+            }
+        }
       //Insert possibilities for other commands here.
     }
 }
