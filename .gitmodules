@@ -1,0 +1,3 @@
+[submodule "client"]
+	path = client
+	url = ssh://git@github.com/vinc96/cs3505_project2_client
