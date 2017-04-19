@@ -45,6 +45,14 @@ void socket_manager::accept_socket(const boost::system::error_code &error_code, 
 }
 
 /*
+ * The function called when we need to handle data recieved on an incoming socket.
+ */
+void socket_manager::read_data(const boost::system::error_code &error_code, socket_state *socket)
+{
+  
+}
+
+/*
  * Description:
  * Creates a new socket_manager class. Before this class is constructed, a logging resource should be initialized.
  *
@@ -56,9 +64,10 @@ socket_manager::socket_manager(network_callbacks callbacks)
 {
   //Create the map for accepting sockets.
   sockets = new SOCKETMAP();
+  //Create an endpoint
+  our_endpoint = new ip::tcp::endpoint(ip::tcp::v4(), PORT);
   //Create an acceptor to accpet connecting sockets
-  
-  //Create a socket to 
+  our_acceptor = new ip::tcp::acceptor(our_io_service, *our_endpoint);
   //Spawn a new thread to accept sockets.
 }
 
@@ -67,6 +76,8 @@ socket_manager::socket_manager(network_callbacks callbacks)
  */
 socket_manager::~socket_manager()
 {
+  //Clean up our endpoint
+  delete(our_endpoint);
   //Clean up all our sockets.
   for(SOCKETMAP::iterator iterator = sockets->begin(); iterator != sockets->end(); iterator++)
     {

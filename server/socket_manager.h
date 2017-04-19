@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <unordered_map>
+#include <tuple>
 /*
   #include <boost/asio/io_service.hpp>
   #include <boost/asio/write.hpp>
@@ -23,18 +24,32 @@ namespace CS3505
    */
   struct socket_state
   {
-    socket_state(boost::asio::io_service service, boost::asio::ip::tcp::endpoint endpoint)
+  socket_state(boost::asio::io_service service, boost::asio::ip::tcp::endpoint endpoint, int buf_size)
       : socket(service, endpoint)
 
     {
+      //Allocate our buffer
+      buffer = new char[buf_size];
     }
 
     ~socket_state()
     {
+      //Close the socket.
       socket.close();
+      //Free our buffer.
+      delete(buffer);
     }
+    //The socket that we recieve data from. 
     boost::asio::ip::tcp::socket socket;
+    /*
+    * As we receive data from the socket, it's shuffled into this buffer, so we can handle it as
+    * we recieve complete messages.
+    */
     std::stringstream stream;
+    /*
+     * The buffer that our socket writes data in.
+     */
+    char* buffer;
   };
 
   //Typedefs:
@@ -57,16 +72,17 @@ namespace CS3505
      * Parameters:
      * spreadsheet_name: The name of the spreadsheet the client wants to connect to.
      * client_identifier: The identifier that the socket_manager has assigned to this specific client.
-     *                Used as a parameter in send_message to send data to a specific client.
+     *  Used as a parameter in send_message to send data to a specific client.
      */
     void *client_connected(std::string spreadsheet_name, std::string client_identifier);
     /*
      * The function that's called when we recieve a complete, terminated message from some client.
      *
      * Parameters:
+     * client_identifier: the client identifier of the client that disconnected.
      * message: The message recieved from the client, complete with terminating character.
      */
-    void *message_recieved(std::string message);
+    void *message_recieved(std::string client_identifier, std::string message);
     /*
      * The function that's called when a client's socket connection is lost (either through
      * disconnection, or network issues).
@@ -84,18 +100,28 @@ namespace CS3505
     //The terminating character that we use to determine when a message is finished.
     static const char TERM_CHAR = '\n';
     //The TCP port we're operating on.
-    static const int PORT = 2112;
+    static const unsigned short PORT = 2112;
+    //The size of the buffers that we're using for sockets.
+    static const int buff_size = 1024;
     //The struct containing the callbacks we want to execute when we recieve activity on the socket.
     network_callbacks callbacks;
     //The map containing our sockets, mapped to their unique identifiers.
     SOCKETMAP *sockets;
+    //The endpoint we use to accept connections on port PORT.
+    boost::asio::ip::tcp::endpoint *our_endpoint;
+    //The ioservice for the networking class
+    boost::asio::io_service our_io_service;
+    //The acceptor we use to accept connections on port PORT.
+    boost::asio::ip::tcp::acceptor *our_acceptor;
+    //The acceptor we use to accept 
     //The mutex we use to avoid race conditions
     std::mutex mtx;
     //The function we call when we want to start accepting socket connections.
     void start_accept();
     //The function called when we need to accept a new socket connection.
     void accept_socket(const boost::system::error_code &error_code, socket_state *socket_state);
-
+    //The function called when we need to handle data recieved on an incoming socket.
+    void read_data(const boost::system::error_code &error_code, socket_state *socket);
   public:
     /*
      * Description:
