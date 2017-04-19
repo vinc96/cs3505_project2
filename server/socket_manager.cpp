@@ -6,14 +6,13 @@
 using namespace CS3505;
 using namespace std;
 using namespace boost::asio;
-using namespace std::placeholders;
 
 /*
  * Generates a socket string name unique among the existing sockets.
  */
 string generate_socket_name()
 {
-
+  return "0"; //Placeholder
 }
 
 /*
@@ -32,6 +31,13 @@ void socket_manager::accept_socket(socket_state *socket, const boost::system::er
       //Add the socket to our map of sockets, and start accepting sockets again.
       string name = generate_socket_name();
       sockets->emplace(name, socket); 
+
+      //Start an async read some
+      socket->socket.async_read_some(buffer(socket->buffer, buff_size), 
+				     boost::bind(&socket_manager::read_data, 
+						 this, socket, boost::asio::placeholders::error, 
+						 boost::asio::placeholders::bytes_transferred));
+
       //Start accepting sockets.
       socket_state* ss = new socket_state(our_io_service, our_endpoint, buff_size);
       our_acceptor->async_accept(ss->socket, 
@@ -45,8 +51,9 @@ void socket_manager::accept_socket(socket_state *socket, const boost::system::er
 /*
  * The function called when we need to handle data recieved on an incoming socket.
  */
-void socket_manager::read_data(socket_state *socket, const boost::system::error_code &error_code)
+void socket_manager::read_data(socket_state *socket, const boost::system::error_code &error_code, int bytes_read)
 {
+  //Read bytes_read bytes into the socket buffer
   
 }
 

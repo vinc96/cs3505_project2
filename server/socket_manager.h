@@ -120,7 +120,7 @@ namespace CS3505
     //The function called when we need to accept a new socket connection.
     void accept_socket(socket_state *socket_state, const boost::system::error_code &error_code);
     //The function called when we need to handle data recieved on an incoming socket.
-    void read_data(socket_state *socket, const boost::system::error_code &error_code);
+    void read_data(socket_state *socket, const boost::system::error_code &error_code, int bytes_read);
   public:
     /*
      * Description:
