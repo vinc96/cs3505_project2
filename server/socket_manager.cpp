@@ -1,24 +1,65 @@
 //Written by Josh Christensen
 
 #include "socket_manager.h"
+#include "logger.h"
 
 using namespace CS3505;
 using namespace std;
+using namespace boost::asio;
 
+/*
+ * Generates a socket string name unique among the existing sockets.
+ */
+string generate_socket_name()
+{
+
+}
+/*
+ * The function called when it's time to start accepting sockets.
+ */
+void socket_manager::start_accept()
+{
+  
+}
+
+/*
+ * The function called when we need to accept a new socket connection. Passed too boost's async_accept. 
+ */
+void socket_manager::accept_socket(const boost::system::error_code &error_code, socket_state *socket)
+{
+  logger *log = logger::get_logger();
+  if (error_code)
+    {
+      log->log(string("Socket Error: ") + error_code.message(), loglevel::ERROR);
+    }
+  else
+    {
+      mtx.lock();
+      //Add the socket to our map of sockets, and start accepting sockets again.
+      string name = generate_socket_name();
+      sockets->emplace(name, socket); 
+      
+
+      mtx.unlock();
+    }
+}
 
 /*
  * Description:
- * Creates a new socket_manager class, logging to the specified file.
+ * Creates a new socket_manager class. Before this class is constructed, a logging resource should be initialized.
  *
  * Parameters:
  * callbacks: The network_callbacks struct we should use for our callbacks.
- * log_file: A string, corresponding to some relative filepath that we should log our output to.
- * logged output is plaintext output, logged to the end of the file.
  */
-socket_manager::socket_manager(network_callbacks callbacks, string log_file)
+socket_manager::socket_manager(network_callbacks callbacks)
   : callbacks(callbacks)
 {
-
+  //Create the map for accepting sockets.
+  sockets = new SOCKETMAP();
+  //Create an acceptor to accpet connecting sockets
+  
+  //Create a socket to 
+  //Spawn a new thread to accept sockets.
 }
 
 /*
@@ -26,7 +67,13 @@ socket_manager::socket_manager(network_callbacks callbacks, string log_file)
  */
 socket_manager::~socket_manager()
 {
-
+  //Clean up all our sockets.
+  for(SOCKETMAP::iterator iterator = sockets->begin(); iterator != sockets->end(); iterator++)
+    {
+      delete(iterator->second);
+    }
+  //Delete our socket map.
+  delete(sockets);
 }
 
 /*

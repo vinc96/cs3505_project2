@@ -3,9 +3,43 @@
 #define SOCKET_MANAGER_H
 
 #include <string>
+#include <sstream>
+#include <unordered_map>
+/*
+  #include <boost/asio/io_service.hpp>
+  #include <boost/asio/write.hpp>
+  #include <boost/asio/buffer.hpp>
+  #include <boost/asio/ip/tcp.hpp>
+*/
+#include <boost/asio.hpp>
+#include "logger.h"
 
 namespace CS3505
 {
+
+  /*
+   * Description:
+   * A struct that contains a stringstream, and a boost socket. 
+   */
+  struct socket_state
+  {
+    socket_state(boost::asio::io_service service, boost::asio::ip::tcp::endpoint endpoint)
+      : socket(service, endpoint)
+
+    {
+    }
+
+    ~socket_state()
+    {
+      socket.close();
+    }
+    boost::asio::ip::tcp::socket socket;
+    std::stringstream stream;
+  };
+
+  //Typedefs:
+  typedef std::unordered_map<std::string, socket_state*> SOCKETMAP;
+
   /*
    * Description:
    * A struct containing callbacks that are used to process incoming data.
@@ -50,24 +84,27 @@ namespace CS3505
     //The terminating character that we use to determine when a message is finished.
     static const char TERM_CHAR = '\n';
     //The TCP port we're operating on.
-    const int PORT = 11000;
+    static const int PORT = 2112;
     //The struct containing the callbacks we want to execute when we recieve activity on the socket.
     network_callbacks callbacks;
-
+    //The map containing our sockets, mapped to their unique identifiers.
+    SOCKETMAP *sockets;
+    //The mutex we use to avoid race conditions
+    std::mutex mtx;
+    //The function we call when we want to start accepting socket connections.
+    void start_accept();
     //The function called when we need to accept a new socket connection.
-    void accept_socket();
+    void accept_socket(const boost::system::error_code &error_code, socket_state *socket_state);
 
   public:
     /*
      * Description:
-     * Creates a new socket_manager class, logging to the specified file.
+     * Creates a new socket_manager class, logging to the specified logger.
      *
      * Parameters:
      * callbacks: The network_callbacks struct we should use for our callbacks.
-     * log_file: A string, corresponding to some relative filepath that we should log our output to.
-     * logged output is plaintext output, logged to the end of the file.
      */
-    socket_manager(network_callbacks callbacks, std::string log_file);
+    socket_manager(network_callbacks callbacks);
     /*
      * Description: The destructor for the socket_manager class. Cleans up all used system resources.
      */
