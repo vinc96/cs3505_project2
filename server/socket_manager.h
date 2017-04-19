@@ -13,6 +13,7 @@
   #include <boost/asio/ip/tcp.hpp>
 */
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
 #include "logger.h"
 
 namespace CS3505
@@ -24,7 +25,7 @@ namespace CS3505
    */
   struct socket_state
   {
-  socket_state(boost::asio::io_service service, boost::asio::ip::tcp::endpoint endpoint, int buf_size)
+  socket_state(boost::asio::io_service &service, boost::asio::ip::tcp::endpoint endpoint, int buf_size)
       : socket(service, endpoint)
 
     {
@@ -108,7 +109,7 @@ namespace CS3505
     //The map containing our sockets, mapped to their unique identifiers.
     SOCKETMAP *sockets;
     //The endpoint we use to accept connections on port PORT.
-    boost::asio::ip::tcp::endpoint *our_endpoint;
+    boost::asio::ip::tcp::endpoint our_endpoint;
     //The ioservice for the networking class
     boost::asio::io_service our_io_service;
     //The acceptor we use to accept connections on port PORT.
@@ -116,12 +117,10 @@ namespace CS3505
     //The acceptor we use to accept 
     //The mutex we use to avoid race conditions
     std::mutex mtx;
-    //The function we call when we want to start accepting socket connections.
-    void start_accept();
     //The function called when we need to accept a new socket connection.
-    void accept_socket(const boost::system::error_code &error_code, socket_state *socket_state);
+    void accept_socket(socket_state *socket_state, const boost::system::error_code &error_code);
     //The function called when we need to handle data recieved on an incoming socket.
-    void read_data(const boost::system::error_code &error_code, socket_state *socket);
+    void read_data(socket_state *socket, const boost::system::error_code &error_code);
   public:
     /*
      * Description:
