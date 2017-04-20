@@ -2,6 +2,7 @@
 
 #include "socket_manager.h"
 #include <boost/bind.hpp>
+#include <functional>
 #include "logger.h"
 
 using namespace CS3505;
@@ -9,9 +10,18 @@ using namespace std;
 using namespace boost::asio;
 
 /*
+ *
+ */
+void socket_manager::do_work()
+{
+  io_service::work work(our_io_service); //Create a work object.
+  our_io_service.run();
+}
+
+/*
  * Generates a socket string name unique among the existing sockets.
  */
-string generate_socket_name()
+string socket_manager::generate_socket_name()
 {
   return "0"; //Placeholder.
 }
@@ -24,7 +34,7 @@ void socket_manager::accept_socket(socket_state *socket, const boost::system::er
   logger *log = logger::get_logger();
   if (error_code)
     {
-      log->log(string("Socket Error: ") + error_code.message(), loglevel::ERROR);
+      log->log(string("Socket Accept Error: ") + error_code.message(), loglevel::ERROR);
     }
   else
     {
@@ -58,41 +68,73 @@ void socket_manager::accept_socket(socket_state *socket, const boost::system::er
  */
 void socket_manager::read_data(socket_state *socket_state, const boost::system::error_code &error_code, int bytes_read)
 {
-  //Start reading again
-  socket_state->socket.async_read_some(buffer(socket_state->buffer, buff_size), 
-				 boost::bind(&socket_manager::read_data, 
-					     this, socket_state, boost::asio::placeholders::error, 
-					     boost::asio::placeholders::bytes_transferred));
   //Grab the logger
   logger *log = logger::get_logger();
-  //Lock on the socket, to ensure that we don't have race conditions with the stream.
-  socket_state->mtx.lock();
-  //Read bytes_read bytes into the socket buffer
-  for (int i = 0; i <  bytes_read; i++)
+  //If we had an error, handle it.
+  if (error_code)
     {
-      socket_state->stream << socket_state->buffer[i];
-    }
-  //Read through the stream, extracting messages
-  string message;
-  //Read until the failbit is set, indicating we didn't find a newline.
-  while (!socket_state->stream.failbit)
-    {
-      getline(socket_state->stream, message);
-      //If the fail bit isn't set, call the method to handle this message.
-      if (socket_state->stream.failbit)
+      //If the socket is disconnecting, handle the disconnect.
+      if (error_code == error::eof)
 	{
-	  callbacks.message_received(socket_state->identifier, message);
-	  //Log that we recieved a message.
-	  log->log(string("Message Recieved From ") + 
-		   socket_state->identifier + string(": ") + 
-		   message, loglevel::INFO);
+	  handle_disconnect(socket_state);
+	}
+      else
+	{
+	  log->log(string("Socket Recieve Error: ") + error_code.message(), loglevel::ERROR);
 	}
     }
-  //Put whatever we got back into the stream, to be handled later.
-  socket_state->stream << message;
+  else
+    {
+      //Start reading again
+      socket_state->socket.async_read_some(buffer(socket_state->buffer, buff_size), 
+					   boost::bind(&socket_manager::read_data, 
+						       this, socket_state, boost::asio::placeholders::error, 
+						       boost::asio::placeholders::bytes_transferred));
+      log->log("Read Data Called", loglevel::INFO);
+      //Lock on the socket, to ensure that we don't have race conditions with the stream.
+      socket_state->mtx.lock();
+      //Read bytes_read bytes into the socket buffer
+      for (int i = 0; i <  bytes_read; i++)
+	{
+	  socket_state->stream << socket_state->buffer[i];
+	}
+      //Read through the stream, extracting messages
+      string message;
+      //Read until the failbit is set, indicating we didn't find a newline.
+      while (!socket_state->stream.failbit)
+	{
+	  getline(socket_state->stream, message);
+	  //If the fail bit isn't set, call the method to handle this message.
+	  if (!socket_state->stream.failbit)
+	    {
+	      callbacks.message_received(socket_state->identifier, message);
+	      //Log that we recieved a message.
+	      log->log(string("Message Recieved From ") + 
+		       socket_state->identifier + string(": ") + 
+		       message, loglevel::INFO);
+	    }
+	}
+      //Put whatever we got back into the stream, to be handled later.
+      socket_state->stream << message;
   
-  //Unlock on the socket
-  socket_state->mtx.lock();
+      //Unlock on the socket
+      socket_state->mtx.unlock();
+    }
+}
+
+/*
+ * Handles disconnecting a socket when the client disconnects.
+ */
+void socket_manager::handle_disconnect(socket_state *disconnected_socket)
+{
+  //Lock
+  mtx.lock();
+  //Remove the socket state from our map.
+  sockets->erase(disconnected_socket->identifier);
+  //Delete the socket.
+  delete(disconnected_socket);
+  //Unlock
+  mtx.unlock();
 }
 
 /*
@@ -105,6 +147,8 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 socket_manager::socket_manager(network_callbacks callbacks)
   : callbacks(callbacks)
 {
+  //Spawn a thread to do the async io work.
+  work_thread = new thread(std::bind(&socket_manager::do_work, this));
   //Create the map for accepting sockets.
   sockets = new SOCKETMAP();
   //Set the port for the endpoint
@@ -126,12 +170,17 @@ socket_manager::socket_manager(network_callbacks callbacks)
  */
 socket_manager::~socket_manager()
 {
-  //Clean up our endpoint
   //Clean up all our sockets.
   for(SOCKETMAP::iterator iterator = sockets->begin(); iterator != sockets->end(); iterator++)
     {
       delete(iterator->second);
     }
+  //Stop all io.
+  our_io_service.stop();
+  //Join our work thread
+  work_thread->join();
+  //Clean up our endpoint
+  
   //Delete our socket map.
   delete(sockets);
 }

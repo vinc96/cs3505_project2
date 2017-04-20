@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <mutex>
 #include <boost/asio.hpp>
+#include <thread>
 
 namespace CS3505
 {
@@ -18,12 +19,12 @@ namespace CS3505
   struct socket_state
   {
   socket_state(boost::asio::io_service &service, boost::asio::ip::tcp::endpoint endpoint, int buf_size)
-  : socket(service, endpoint)
+  : socket(service)//socket(service, endpoint)
 
     {
       //Allocate our buffer
       buffer = new char[buf_size];
-    }
+      }
 
     ~socket_state()
     {
@@ -106,25 +107,33 @@ namespace CS3505
     //The terminating character that we use to determine when a message is finished.
     static const char TERM_CHAR = '\n';
     //The TCP port we're operating on.
-    static const unsigned short PORT = 2684;
+    static const unsigned short PORT = 2112;
     //The size of the buffers that we're using for sockets.
     static const int buff_size = 1024;
     //The struct containing the callbacks we want to execute when we recieve activity on the socket.
     network_callbacks callbacks;
     //The map containing our sockets, mapped to their unique identifiers.
     SOCKETMAP *sockets;
-    //The endpoint we use to accept connections on port PORT.
-    boost::asio::ip::tcp::endpoint our_endpoint;
+    //The thread that we use to perform the asynchronous boost io.
+    std::thread *work_thread;
     //The ioservice for the networking class
     boost::asio::io_service our_io_service;
+    //The endpoint we use to accept connections on port PORT.
+    boost::asio::ip::tcp::endpoint our_endpoint;
     //The acceptor we use to accept connections on port PORT.
     boost::asio::ip::tcp::acceptor *our_acceptor;
     //The mutex we use to avoid race conditions
     std::mutex mtx;
+    //The function we use to do background async io work. Started in its own worker thread.
+    void do_work();
+    //Generates a socket string name unique among existing sockets.
+    std::string generate_socket_name();
     //The function called when we need to accept a new socket connection.
     void accept_socket(socket_state *socket_state, const boost::system::error_code &error_code);
     //The function called when we need to handle data recieved on an incoming socket.
     void read_data(socket_state *socket_state, const boost::system::error_code &error_code, int bytes_read);
+    //Handles disconnecting sockets
+    void handle_disconnect(socket_state *socket_state);
   public:
     /*
      * Description:
