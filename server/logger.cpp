@@ -80,8 +80,6 @@ logger* logger::get_logger()
  */
 void logger::log(string message, loglevel level)
 {
-  //Lock the logging resources.
-  mtx.lock();
   string logstring = "";
  switch (level)
    {
@@ -97,12 +95,18 @@ void logger::log(string message, loglevel level)
   //Write to file, if we fit the requirements
   if (level <= file_log_level)
     {
+      //Lock the logging resources.
+      mtx.lock();
       logfile << logstring << endl;
+      mtx.unlock();
     }
   //Write to console, if we fit the requirements.
   if (level <= console_log_level)
     {
+      //Lock the logging resources.
+      mtx.lock();
       cout << logstring << endl;
+      mtx.unlock();
     }
-  mtx.unlock();
+  
 }

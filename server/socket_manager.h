@@ -26,7 +26,7 @@ namespace CS3505
   struct socket_state
   {
   socket_state(boost::asio::io_service &service, boost::asio::ip::tcp::endpoint endpoint, int buf_size)
-      : socket(service, endpoint)
+  : socket(service, endpoint)
 
     {
       //Allocate our buffer
@@ -40,12 +40,22 @@ namespace CS3505
       //Free our buffer.
       delete(buffer);
     }
-    //The socket that we recieve data from. 
+    //The mutex that we use to avoid race conditions on buffer reads.
+    std::mutex mtx;
+    
+    /*
+     * This buffer's unique string identifier.
+     */
+    std::string identifier;
+
+    /*
+     *The socket that we recieve data from. 
+     */
     boost::asio::ip::tcp::socket socket;
     /*
-    * As we receive data from the socket, it's shuffled into this buffer, so we can handle it as
-    * we recieve complete messages.
-    */
+     * As we receive data from the socket, it's shuffled into this buffer, so we can handle it as
+     * we recieve complete messages.
+     */
     std::stringstream stream;
     /*
      * The buffer that our socket writes data in.
@@ -75,15 +85,15 @@ namespace CS3505
      * client_identifier: The identifier that the socket_manager has assigned to this specific client.
      *  Used as a parameter in send_message to send data to a specific client.
      */
-    void *client_connected(std::string spreadsheet_name, std::string client_identifier);
+    void *client_connected(std::string client_identifier);
     /*
      * The function that's called when we recieve a complete, terminated message from some client.
      *
      * Parameters:
      * client_identifier: the client identifier of the client that disconnected.
-     * message: The message recieved from the client, complete with terminating character.
+     * message: The message recieved from the client.
      */
-    void *message_recieved(std::string client_identifier, std::string message);
+    void *message_received(std::string client_identifier, std::string message);
     /*
      * The function that's called when a client's socket connection is lost (either through
      * disconnection, or network issues).
@@ -114,13 +124,12 @@ namespace CS3505
     boost::asio::io_service our_io_service;
     //The acceptor we use to accept connections on port PORT.
     boost::asio::ip::tcp::acceptor *our_acceptor;
-    //The acceptor we use to accept 
     //The mutex we use to avoid race conditions
     std::mutex mtx;
     //The function called when we need to accept a new socket connection.
     void accept_socket(socket_state *socket_state, const boost::system::error_code &error_code);
     //The function called when we need to handle data recieved on an incoming socket.
-    void read_data(socket_state *socket, const boost::system::error_code &error_code, int bytes_read);
+    void read_data(socket_state *socket_state, const boost::system::error_code &error_code, int bytes_read);
   public:
     /*
      * Description:
