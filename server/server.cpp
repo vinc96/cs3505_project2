@@ -56,12 +56,12 @@ bool server::start()
 
   //Create the socket_manager
   network_callbacks callbacks;
-  /*
-  callbacks.client_connected = bind(&server::client_connected, this, placeholders::_1);
-  callbacks.message_received = bind(&server::message_received, this, placeholders::_1,
-				    placeholders::_2);
-  callbacks.client_disconnected = bind(&server::client_disconnected, this, placeholders::_1);
-  */
+  
+  callbacks.client_connected = std::bind(&server::client_connected, this, std::placeholders::_1);
+  callbacks.message_received = std::bind(&server::message_received, this, std::placeholders::_1,
+					 std::placeholders::_2);
+  callbacks.client_disconnected = std::bind(&server::client_disconnected, this, std::placeholders::_1);
+  
   networking = new socket_manager(callbacks);
   //Insert other initialization code here.
   

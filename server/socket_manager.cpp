@@ -49,8 +49,7 @@ void socket_manager::accept_socket(socket_state *socket, const boost::system::er
       //Log that we got a socket
       log->log(string("Connection Recieved: ") + name, loglevel::INFO); 
       //Inform our callback owner that we recieved a socket connection.
-      //TODO: FIX, OR REMOVE THIS.
-      //callbacks.client_connected(name);
+      callbacks.client_connected(name);
     }
 }
 
@@ -116,6 +115,10 @@ socket_manager::socket_manager(network_callbacks callbacks)
   socket_state* ss = new socket_state(our_io_service, our_endpoint, buff_size);
   our_acceptor->async_accept(ss->socket, 
 			     boost::bind(&socket_manager::accept_socket, this, ss, boost::asio::placeholders::error));
+  //Log that we've started accepting sockets
+  logger *log = logger::get_logger();
+  log->log("Networking accepting sockets..", loglevel::INFO);
+  
 }
 
 /*

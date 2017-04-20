@@ -72,20 +72,22 @@ namespace CS3505
      * The function that's called when a new client connects on the socket. Should handle sending
      * initialization data to the client.
      *
-     * Parameters:
+     * Parameters (in order):
      * spreadsheet_name: The name of the spreadsheet the client wants to connect to.
      * client_identifier: The identifier that the socket_manager has assigned to this specific client.
      *  Used as a parameter in send_message to send data to a specific client.
      */
-    void (*client_connected)(std::string client_identifier);
+    std::function<void(std::string)> client_connected;
+    //void (*client_connected)(std::string client_identifier);
     /*
      * The function that's called when we recieve a complete, terminated message from some client.
      *
-     * Parameters:
+     * Parameters (in order):
      * client_identifier: the client identifier of the client that disconnected.
      * message: The message recieved from the client.
      */
-    void (*message_received)(std::string client_identifier, std::string message);
+    std::function<void(std::string, std::string)> message_received;
+    //void (*message_received)(std::string client_identifier, std::string message);
     /*
      * The function that's called when a client's socket connection is lost (either through
      * disconnection, or network issues).
@@ -93,7 +95,8 @@ namespace CS3505
      * Parameters:
      * client_identifier: the client identifier of the client that disconnected.
      */
-    void (*client_disconnected)(std::string client_identifier);
+    std::function<void(std::string)>  client_disconnected;
+    //void (*client_disconnected)(std::string client_identifier);
   };
 
   //Responsible for accepting and keeping track of sockets.
@@ -103,7 +106,7 @@ namespace CS3505
     //The terminating character that we use to determine when a message is finished.
     static const char TERM_CHAR = '\n';
     //The TCP port we're operating on.
-    static const unsigned short PORT = 2112;
+    static const unsigned short PORT = 2684;
     //The size of the buffers that we're using for sockets.
     static const int buff_size = 1024;
     //The struct containing the callbacks we want to execute when we recieve activity on the socket.
