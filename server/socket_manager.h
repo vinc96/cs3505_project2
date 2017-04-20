@@ -5,16 +5,8 @@
 #include <string>
 #include <sstream>
 #include <unordered_map>
-#include <tuple>
-/*
-  #include <boost/asio/io_service.hpp>
-  #include <boost/asio/write.hpp>
-  #include <boost/asio/buffer.hpp>
-  #include <boost/asio/ip/tcp.hpp>
-*/
+#include <mutex>
 #include <boost/asio.hpp>
-#include <boost/bind.hpp>
-#include "logger.h"
 
 namespace CS3505
 {
@@ -85,7 +77,7 @@ namespace CS3505
      * client_identifier: The identifier that the socket_manager has assigned to this specific client.
      *  Used as a parameter in send_message to send data to a specific client.
      */
-    void *client_connected(std::string client_identifier);
+    void (*client_connected)(std::string client_identifier);
     /*
      * The function that's called when we recieve a complete, terminated message from some client.
      *
@@ -93,7 +85,7 @@ namespace CS3505
      * client_identifier: the client identifier of the client that disconnected.
      * message: The message recieved from the client.
      */
-    void *message_received(std::string client_identifier, std::string message);
+    void (*message_received)(std::string client_identifier, std::string message);
     /*
      * The function that's called when a client's socket connection is lost (either through
      * disconnection, or network issues).
@@ -101,7 +93,7 @@ namespace CS3505
      * Parameters:
      * client_identifier: the client identifier of the client that disconnected.
      */
-    void *client_disconnected(std::string client_identifier);
+    void (*client_disconnected)(std::string client_identifier);
   };
 
   //Responsible for accepting and keeping track of sockets.

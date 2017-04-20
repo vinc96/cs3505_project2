@@ -1,6 +1,7 @@
 //Written by Josh Christensen
 
 #include "socket_manager.h"
+#include <boost/bind.hpp>
 #include "logger.h"
 
 using namespace CS3505;
@@ -48,7 +49,8 @@ void socket_manager::accept_socket(socket_state *socket, const boost::system::er
       //Log that we got a socket
       log->log(string("Connection Recieved: ") + name, loglevel::INFO); 
       //Inform our callback owner that we recieved a socket connection.
-      callbacks.client_connected(name);
+      //TODO: FIX, OR REMOVE THIS.
+      //callbacks.client_connected(name);
     }
 }
 
