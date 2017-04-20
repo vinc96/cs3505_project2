@@ -8,4 +8,4 @@ socket_manager.o: socket_manager.h socket_manager.cpp
 logger.o: logger.h logger.cpp
 	g++ -c logger.cpp -std=c++11 -g
 clean:
-	rm *.o
+	rm *.o *~ server_start
