@@ -63,7 +63,6 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 					     this, socket_state, boost::asio::placeholders::error, 
 					     boost::asio::placeholders::bytes_transferred));
   //Grab the logger
-  //Log that we recieved a message.
   logger *log = logger::get_logger();
   //Lock on the socket, to ensure that we don't have race conditions with the stream.
   socket_state->mtx.lock();
@@ -82,6 +81,7 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
       if (socket_state->stream.failbit)
 	{
 	  callbacks.message_received(socket_state->identifier, message);
+	  //Log that we recieved a message.
 	  log->log(string("Message Recieved From ") + 
 		   socket_state->identifier + string(": ") + 
 		   message, loglevel::INFO);
@@ -89,7 +89,6 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
     }
   //Put whatever we got back into the stream, to be handled later.
   socket_state->stream << message;
-  
   
   //Unlock on the socket
   socket_state->mtx.lock();
