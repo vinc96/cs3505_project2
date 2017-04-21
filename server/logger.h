@@ -9,6 +9,13 @@
 
 namespace CS3505
 {
+  /**
+   * Represents a level of logging. 
+   * Errors are fatal situations
+   * Warning are potentially fatal situations
+   * Info is general information (client connects and disconnects, etc.)
+   * All logs nearly everything loggable (messages recieved and sent, etc.) 
+   */
   enum loglevel
   { ERROR = 0, WARNING = 1, INFO = 2, ALL = 3};
   /**

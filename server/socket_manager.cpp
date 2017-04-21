@@ -110,7 +110,7 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 	      //Log that we recieved a message.
 	      log->log(string("Message Recieved From ") + 
 		       socket_state->identifier + string(": ") + 
-		       message, loglevel::INFO);
+		       message, loglevel::ALL);
 	    }
 	}
       //Clear the stream, and put whatever we got back into the stream, plus a newline, to be handled later.
