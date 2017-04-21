@@ -67,7 +67,13 @@ bool server::start()
   
   //Log that the server started
   log->log("Server Started", loglevel::INFO);
-    
+  /*
+  //Spam "Test i" to all sockets
+  for (int i = 0; i < 2000000000; i++)
+    {
+      networking->send_all("TEST");
+    }
+  */
   return true; 
 }
 

@@ -8,6 +8,8 @@
 #include <mutex>
 #include <boost/asio.hpp>
 #include <thread>
+#include <queue>
+#include <list>
 
 namespace CS3505
 {
@@ -23,7 +25,7 @@ namespace CS3505
 
     {
       //Allocate our buffer
-      buffer = new char[buf_size];
+      receive_buffer = new char[buf_size];
       }
 
     ~socket_state()
@@ -31,7 +33,14 @@ namespace CS3505
       //Close the socket.
       socket.close();
       //Free our buffer.
-      delete(buffer);
+      delete(receive_buffer);
+      //If our send_buffers queue isn't empty, free the buffers.
+      //TODO: Warning?
+      while (send_buffers.size() != 0)
+	{
+	  delete(send_buffers.front());
+	  send_buffers.pop();
+	}
     }
     //The mutex that we use to avoid race conditions on buffer reads.
     std::mutex mtx;
@@ -53,7 +62,11 @@ namespace CS3505
     /*
      * The buffer that our socket writes data in.
      */
-    char* buffer;
+    char* receive_buffer;
+    /*
+     * The buffer that our socket writes data from.
+     */
+    std::queue<char*, std::list<char*> > send_buffers;
   };
 
   //Typedefs:
@@ -79,7 +92,6 @@ namespace CS3505
      *  Used as a parameter in send_message to send data to a specific client.
      */
     std::function<void(std::string)> client_connected;
-    //void (*client_connected)(std::string client_identifier);
     /*
      * The function that's called when we recieve a complete, terminated message from some client.
      *
@@ -88,7 +100,6 @@ namespace CS3505
      * message: The message recieved from the client.
      */
     std::function<void(std::string, std::string)> message_received;
-    //void (*message_received)(std::string client_identifier, std::string message);
     /*
      * The function that's called when a client's socket connection is lost (either through
      * disconnection, or network issues).
@@ -97,7 +108,6 @@ namespace CS3505
      * client_identifier: the client identifier of the client that disconnected.
      */
     std::function<void(std::string)>  client_disconnected;
-    //void (*client_disconnected)(std::string client_identifier);
   };
 
   //Responsible for accepting and keeping track of sockets.
@@ -132,6 +142,8 @@ namespace CS3505
     void accept_socket(socket_state *socket_state, const boost::system::error_code &error_code);
     //The function called when we need to handle data recieved on an incoming socket.
     void read_data(socket_state *socket_state, const boost::system::error_code &error_code, int bytes_read);
+    //The function called when we finish writing data to a socket
+    void data_written(socket_state *socket_state, const boost::system::error_code &error_code, int bytes_written);
     //Handles disconnecting sockets
     void handle_disconnect(socket_state *socket_state);
   public:

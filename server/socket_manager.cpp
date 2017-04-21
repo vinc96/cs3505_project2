@@ -10,7 +10,7 @@ using namespace std;
 using namespace boost::asio;
 
 /*
- *
+ * Used when we spawn a new thread to handle async socket requests.
  */
 void socket_manager::do_work()
 {
@@ -51,7 +51,7 @@ void socket_manager::accept_socket(socket_state *socket, const boost::system::er
       sockets->emplace(name, socket);
 
       //Start an async read some to receive data on the socket.
-      socket->socket.async_read_some(buffer(socket->buffer, buff_size), 
+      socket->socket.async_read_some(buffer(socket->receive_buffer, buff_size), 
 				     boost::bind(&socket_manager::read_data, 
 						 this, socket, boost::asio::placeholders::error, 
 						 boost::asio::placeholders::bytes_transferred));
@@ -86,7 +86,7 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
   else
     {
       //Start reading again
-      socket_state->socket.async_read_some(buffer(socket_state->buffer, buff_size), 
+      socket_state->socket.async_read_some(buffer(socket_state->receive_buffer, buff_size), 
 					   boost::bind(&socket_manager::read_data, 
 						       this, socket_state, boost::asio::placeholders::error, 
 						       boost::asio::placeholders::bytes_transferred));
@@ -95,7 +95,7 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
       //Read bytes_read bytes into the socket buffer
       for (int i = 0; i <  bytes_read; i++)
 	{
-	  socket_state->stream << socket_state->buffer[i];
+	  socket_state->stream << socket_state->receive_buffer[i];
 	}
       //Read through the stream, extracting messages
       string message = "";
@@ -120,6 +120,17 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
       //Unlock on the socket
       socket_state->mtx.unlock();
     }
+}
+
+/**
+ * Called when we've finished writing data to a socket, cleans up the buffers set up for the write.
+ * THIS FUNCTION ASSUMES THAT IT'S CALLED ON A SOCKET IN THE SAME ORDER THAT THE ASYNC_WRITES WERE CALLED.
+ */
+void socket_manager::data_written(socket_state *socket_state, const boost::system::error_code &error_code, int bytes_written)
+{
+  //Clean up the send buffer
+  delete(socket_state->send_buffers.front());
+  socket_state->send_buffers.pop();
 }
 
 /*
@@ -195,7 +206,31 @@ socket_manager::~socket_manager()
  */
 bool socket_manager::send_message(string message, string client_identifier)
 {
-
+  //If we don't have the socket registered, return false. 
+  if (sockets->count(client_identifier) == 0)
+    {
+      return false;
+    } 
+  //Lock the manager grabbing the socket
+  mtx.lock();
+  socket_state *socket_state = sockets->at(client_identifier);
+  mtx.unlock();
+  //Lock on the socket
+  socket_state->mtx.lock();
+  //Create a buffer to hold the string
+  char* send_buffer = new char[message.length()];
+  //Copy the string over to that buffer
+  message.copy(send_buffer, message.length(), 0);
+  //Add the buffer to our list of send buffers.
+  socket_state->send_buffers.push(send_buffer);
+  //Start the async send
+  async_write(socket_state->socket,
+	      buffer(send_buffer, message.length()), 
+	      boost::bind(&socket_manager::data_written, 
+			  this, socket_state, boost::asio::placeholders::error, 
+			  boost::asio::placeholders::bytes_transferred));
+  //Unlock on the socket
+  socket_state->mtx.unlock();
 }
 
 /*
@@ -203,5 +238,10 @@ bool socket_manager::send_message(string message, string client_identifier)
  */
 bool socket_manager::send_all(string message)
 {
-
+  //Call send_message on every socket.
+  //TODO: Messages dropped if added mid-iteration?
+  for(SOCKETMAP::iterator iterator = sockets->begin(); iterator != sockets->end(); iterator++)
+    {
+      send_message(message, iterator->second->identifier); //Inefficient (2 hashmap lookups), but clean.
+    }
 }
