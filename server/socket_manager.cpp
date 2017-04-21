@@ -90,7 +90,6 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 					   boost::bind(&socket_manager::read_data, 
 						       this, socket_state, boost::asio::placeholders::error, 
 						       boost::asio::placeholders::bytes_transferred));
-      log->log("Read Data Called", loglevel::INFO);
       //Lock on the socket, to ensure that we don't have race conditions with the stream.
       socket_state->mtx.lock();
       //Read bytes_read bytes into the socket buffer
@@ -99,13 +98,13 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 	  socket_state->stream << socket_state->buffer[i];
 	}
       //Read through the stream, extracting messages
-      string message;
-      //Read until the failbit is set, indicating we didn't find a newline.
-      while (!socket_state->stream.failbit)
+      string message = "";
+      //Read until the end of file is set, indicating we didn't find a newline.
+      while (!socket_state->stream.eof())
 	{
-	  getline(socket_state->stream, message);
-	  //If the fail bit isn't set, call the method to handle this message.
-	  if (!socket_state->stream.failbit)
+	  getline(socket_state->stream, message, '\n');
+	  //If the end of file bit isn't set, call the method to handle this message.
+	  if (!socket_state->stream.eof())
 	    {
 	      callbacks.message_received(socket_state->identifier, message);
 	      //Log that we recieved a message.
@@ -114,8 +113,9 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 		       message, loglevel::INFO);
 	    }
 	}
-      //Put whatever we got back into the stream, to be handled later.
-      socket_state->stream << message;
+      //Clear the stream, and put whatever we got back into the stream, plus a newline, to be handled later.
+      socket_state->stream.clear();
+      socket_state->stream << message ;//<< '\n';
   
       //Unlock on the socket
       socket_state->mtx.unlock();
@@ -127,6 +127,9 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
  */
 void socket_manager::handle_disconnect(socket_state *disconnected_socket)
 {
+  //Log that we're disconnecting
+  logger* log = logger::get_logger();
+  log->log(string("Client Disconnected: ") + disconnected_socket->identifier, loglevel::INFO);
   //Lock
   mtx.lock();
   //Remove the socket state from our map.

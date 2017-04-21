@@ -1,7 +1,7 @@
 [INFO]: Networking accepting sockets..
 [INFO]: Server Started
 [INFO]: Connection Recieved: 0
-[INFO]: Read Data Called
-[INFO]: Read Data Called
-[INFO]: Read Data Called
-[INFO]: Connection Recieved: 0
+[INFO]: Message Recieved From 0: God
+[INFO]: Message Recieved From 0: pissing
+[INFO]: Message Recieved From 0: damnit
+[INFO]: Client Disconnected: 0
