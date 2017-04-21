@@ -6,7 +6,7 @@
 `git submodule init`  
 
 * **update client (at cs3505_project2 root):**  
-`git submodule update` **or** `cd client && git pull`  
+`git submodule update --recursive --remote` **or** `cd client && git pull`  
 
 * **check submodule status:**  
 `git submodule status`
