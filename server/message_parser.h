@@ -7,20 +7,20 @@ namespace CS3505
 {
 
   /*
-   * Represents the type of a message. 
+   * Represents the type of a message.
    * Client->Server Message types are EDIT, UNDO, CONNECT.
    * Server->Client Message types are CHANGE, STARTUP.
    * Shared message types are ISTYPING and DONETYPING.
    * For errors, there's also an ERROR state.
    */
-  enum message_type {EDIT, UNDO, CONNECT,  
-		     CHANGE, STARTUP, 
+  enum message_type {EDIT, UNDO, CONNECT,
+		     CHANGE, STARTUP,
 		     ISTYPING, DONETYPING,
 		     MESSAGE_ERROR};
 
 
   /*
-   * Represents a parsed message from a client. Has an Enum representing the type of message, 
+   * Represents a parsed message from a client. Has an Enum representing the type of message,
    * and a number of fields that will be filled in, depending on message type.
    */
   struct message
@@ -46,16 +46,16 @@ namespace CS3505
   class message_parser
   {
   private:
-  
+
   public:
     /**
-     * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the 
+     * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the
      * contents of the afformentioned message string.
      */
     static message parse_client_message(std::string string_msg);
 
     /**
-     * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the 
+     * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the
      * contents of the afformentioned message string.
      */
     static std::string encode_client_message(message message);
