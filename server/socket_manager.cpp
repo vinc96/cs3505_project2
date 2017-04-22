@@ -216,7 +216,9 @@ bool socket_manager::send_message(string message, string client_identifier)
   socket_state *socket_state = sockets->at(client_identifier);
   mtx.unlock();
   //Lock on the socket
-  socket_state->mtx.lock();
+  //NOTE: IT'S SAFE TO NOT LOCK THE SOCKET RIGHT NOW, AS SEND_MESSAGE IS ALWAYS SENT SEQUENTIALLY
+  //IN RESPONSE TO A received_message.
+  //socket_state->mtx.lock();
   //Create a buffer to hold the string
   char* send_buffer = new char[message.length()];
   //Copy the string over to that buffer
@@ -230,7 +232,7 @@ bool socket_manager::send_message(string message, string client_identifier)
 			  this, socket_state, boost::asio::placeholders::error, 
 			  boost::asio::placeholders::bytes_transferred));
   //Unlock on the socket
-  socket_state->mtx.unlock();
+  //socket_state->mtx.unlock();
 }
 
 /*

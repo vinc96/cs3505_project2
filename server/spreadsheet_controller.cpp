@@ -47,7 +47,7 @@ void spreadsheet_controller::handle_message(message msg)
  * Registers a client identifier with the listener, so it can properly handle messages
  * pertaining to that client. 
  */
-void register_client(std::string client_identifier)
+void spreadsheet_controller::register_client(std::string client_identifier)
 {
 
 }
@@ -56,7 +56,23 @@ void register_client(std::string client_identifier)
  * Deregisters a client identifier, so that the controller no longer has to track that client, and so
  * that subsequent register_client calls won't throw an error.
  */
-void deregister_client(std::string client_identifier)
+void spreadsheet_controller::deregister_client(std::string client_identifier)
 {
 
+}
+
+
+/**
+ * Registers with the controller the function it should use when it wants to send all clients a message.
+ */
+void spreadsheet_controller::register_send_all(std::function<void(message)> func)
+{
+  this->send_all = func;
+}
+/**
+ * Registers with the controller the function it should use when it wants to send a specific client a message.
+ */
+void spreadsheet_controller::register_send_client(std::function<void(std::string, message)> func)
+{
+  this->send_client = func;
 }

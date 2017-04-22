@@ -1,0 +1,15 @@
+[INFO]: Networking accepting sockets..
+[INFO]: Server Started
+[INFO]: Connection Recieved: 0
+[ALL]: Message Recieved From 0: Connect	ass	
+[ERROR]: Cannot parse message: ass
+[ALL]: Message Recieved From 0: ass
+[ERROR]: Cannot parse message: as
+[ALL]: Message Recieved From 0: as
+[ERROR]: Cannot parse message: shart
+[ALL]: Message Recieved From 0: shart
+[ERROR]: Cannot parse message: shartinfart
+[ALL]: Message Recieved From 0: shartinfart
+[ALL]: Message Recieved From 0: Connect	sheet	
+[ALL]: Message Recieved From 0: IsTyping	h	h	
+[INFO]: Client Disconnected: 0

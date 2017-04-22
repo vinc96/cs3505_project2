@@ -2,6 +2,7 @@
 
 #include "server.h"
 #include "logger.h"
+#include "message_parser.h"
 
 using namespace CS3505;
 using namespace std;
@@ -27,10 +28,21 @@ void server::client_connected(std::string client_identifier)
  * client_identifier: the client identifier of the client that disconnected.
  * message: The message recieved from the client.
  */
-void server::message_received(std::string client_identifier, std::string message)
+void server::message_received(std::string client_identifier, std::string message_str)
 {
-  //Parse the message and send it to our controller.
-  
+  //Grab the logger.
+  logger *log = logger::get_logger();
+  //Parse the message and send it to our controller, as long as we didn't log an error.
+  message parsed_msg;
+  parsed_msg = message_parser::parse_client_message(message_str);
+  if (parsed_msg.type == message_type::MESSAGE_ERROR)
+    {
+      log->log(string("Cannot parse message: ") + message_str, loglevel::ERROR);
+    }
+  else
+    {
+      controller->handle_message(parsed_msg);
+    }
 
 }
 /*
@@ -53,7 +65,7 @@ bool server::start()
   logger *log = logger::make_logger("log", loglevel::ALL, loglevel::ALL);
   if (log == NULL)
     {
-      std::cout << "[ERROR]: LOGGER FAILED TO START." << std::endl;
+      std::cout << "[ERROR]: LOGGER FAILED TO START. SERVER EXITING." << std::endl;
       return false;
     }
 
@@ -70,6 +82,12 @@ bool server::start()
   spreadsheets = new spreadsheet_pool();
   //Instantiate the controller, and provide it callbacks to networking, and vice versa.
   controller = new spreadsheet_controller(spreadsheets);
+  controller->register_send_all([=](message msg){
+      networking->send_all(message_parser::encode_client_message(msg));
+    });
+  controller->register_send_client([=](string ident, message msg){
+      networking->send_message(message_parser::encode_client_message(msg), ident);
+    });
   //Log that the server started
   log->log("Server Started", loglevel::INFO);
   /*
