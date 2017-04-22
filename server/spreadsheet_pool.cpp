@@ -1,4 +1,5 @@
 #include "spreadsheet_pool.h"
+#include "sqlite3.h"
 
 using namespace CS3505;
 
