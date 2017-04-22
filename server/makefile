@@ -1,7 +1,7 @@
 server_start: main.cpp server.o
-	g++ main.cpp server.o logger.o message_parser.o socket_manager.o spreadsheet_controller.o spreadsheet_pool.o sqlite.o \
-	-o server_start -std=c++11 \
-	-Wl,-rpath,"/usr/local/lib" -lboost_system -lpthread -ldl -g
+	g++ main.cpp server.o logger.o message_parser.o socket_manager.o \
+	spreadsheet_pool.o spreadsheet_controller.o sqlite.o \
+	-o server_start -std=c++11 -Wl,-rpath,"/usr/local/lib" -lboost_system -lpthread -ldl -g
 server.o: server.h server.cpp message_parser.o socket_manager.o logger.o spreadsheet_controller.o
 	g++ -c server.cpp -std=c++11 -g
 socket_manager.o: socket_manager.h socket_manager.cpp  
@@ -18,3 +18,4 @@ logger.o: logger.h logger.cpp
 	g++ -c logger.cpp -std=c++11 -g
 clean:
 	rm -f *.o *~ server_start
+

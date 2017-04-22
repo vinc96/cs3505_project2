@@ -53,7 +53,7 @@ message message_parser::parse_client_message(string string_message)
   else
     {
       //Error state.
-      msg.type = message_type::ERROR;
+      msg.type = message_type::MESSAGE_ERROR;
     }
   return msg;
 }

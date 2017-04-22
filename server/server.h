@@ -4,6 +4,8 @@
 
 #include <string>
 #include "socket_manager.h"
+#include "spreadsheet_controller.h"
+#include "spreadsheet_pool.h"
 
 namespace CS3505
 {
@@ -12,7 +14,10 @@ namespace CS3505
   private:
     //The socket manager we use to manage all of our connections.
     socket_manager* networking;
-
+    //The controller we use to communicate between the networking and the spreadsheet pool..
+    spreadsheet_controller* controller;
+    //The thread pool that we store all of our spreadsheets in.
+    spreadsheet_pool* spreadsheets;
     /*
      * The function that's called when a new client connects on the socket. Should handle sending
      * initialization data to the client.
