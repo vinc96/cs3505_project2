@@ -83,10 +83,30 @@ bool server::start()
   //Instantiate the controller, and provide it callbacks to networking, and vice versa.
   controller = new spreadsheet_controller(spreadsheets);
   controller->register_send_all([=](message msg){
-      networking->send_all(message_parser::encode_client_message(msg));
+      string str_msg = message_parser::encode_client_message(msg);
+      if (!networking->send_all(str_msg))
+	{
+	  logger::get_logger()->log(string("Message Failed to Send: ") + str_msg,
+				    loglevel::ERROR);
+	}
+      else
+	{
+	  logger::get_logger()->log(string("Message Sent: ") + str_msg,
+				    loglevel::ALL);
+	}
     });
   controller->register_send_client([=](string ident, message msg){
-      networking->send_message(message_parser::encode_client_message(msg), ident);
+      string str_msg = message_parser::encode_client_message(msg);
+      if (!networking->send_message(str_msg, ident))
+	{
+	  logger::get_logger()->log(string("Message Failed to Send to: ") + ident +
+				    string(" Message: ") + str_msg, loglevel::ERROR);
+	}
+      else
+	{
+	  logger::get_logger()->log(string("Message Sent to: ") + ident +
+				    string(" Message: ") + str_msg, loglevel::ALL);
+	}
     });
   //Log that the server started
   log->log("Server Started", loglevel::INFO);

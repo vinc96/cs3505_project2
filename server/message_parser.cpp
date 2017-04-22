@@ -87,6 +87,7 @@ string message_parser::encode_client_message(message message)
 	  //Write the cell contents.
 	  sstream << iterator->second << "\t";
 	}
+      sstream << "\n";
       break;
     case message_type::ISTYPING:
       sstream << "IsTyping\t";

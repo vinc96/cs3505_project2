@@ -106,11 +106,11 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 	  //If the end of file bit isn't set, call the method to handle this message.
 	  if (!socket_state->stream.eof())
 	    {
-	      callbacks.message_received(socket_state->identifier, message);
 	      //Log that we recieved a message.
 	      log->log(string("Message Recieved From ") + 
 		       socket_state->identifier + string(": ") + 
 		       message, loglevel::ALL);
+	      callbacks.message_received(socket_state->identifier, message);
 	    }
 	}
       //Clear the stream, and put whatever we got back into the stream, plus a newline, to be handled later.
@@ -209,7 +209,7 @@ bool socket_manager::send_message(string message, string client_identifier)
   //If we don't have the socket registered, return false. 
   if (sockets->count(client_identifier) == 0)
     {
-      return false;
+      //return false;
     } 
   //Lock the manager grabbing the socket
   mtx.lock();
@@ -231,6 +231,7 @@ bool socket_manager::send_message(string message, string client_identifier)
 	      boost::bind(&socket_manager::data_written, 
 			  this, socket_state, boost::asio::placeholders::error, 
 			  boost::asio::placeholders::bytes_transferred));
+  return true;
   //Unlock on the socket
   //socket_state->mtx.unlock();
 }
@@ -240,10 +241,15 @@ bool socket_manager::send_message(string message, string client_identifier)
  */
 bool socket_manager::send_all(string message)
 {
+  if (sockets->size() == 0)
+    {
+      return false;
+    }
   //Call send_message on every socket.
   //TODO: Messages dropped if added mid-iteration?
   for(SOCKETMAP::iterator iterator = sockets->begin(); iterator != sockets->end(); iterator++)
     {
       send_message(message, iterator->second->identifier); //Inefficient (2 hashmap lookups), but clean.
     }
+  return true;
 }

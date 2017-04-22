@@ -22,6 +22,7 @@ void spreadsheet_controller::handle_message(message msg)
     {
     case message_type::CONNECT:
       //PLACEHOLDER: SEND A STARTUP WITH A SINGLE CELL AS "YOU GOT IT!, ID of 0."
+      msg.type = message_type::STARTUP;
       msg.identifier = "0";
       msg.cells.emplace("A1", "YOU GOT IT!");
       send_client(msg.identifier, msg);
