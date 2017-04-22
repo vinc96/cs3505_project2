@@ -56,6 +56,15 @@ namespace CS3505
      * that subsequent register_client calls won't throw an error.
      */
     void deregister_client(std::string client_identifier);
+
+    /**
+     * Registers with the controller the function it should use when it wants to send all clients a message.
+     */
+    void register_send_all(std::function<void(message)> func);
+    /**
+     * Registers with the controller the function it should use when it wants to send a specific client a message.
+     */
+    void register_send_client(std::function<void(std::string, message)> func);
   };
 }
 

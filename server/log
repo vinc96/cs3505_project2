@@ -1,2 +1,7 @@
 [INFO]: Networking accepting sockets..
 [INFO]: Server Started
+[INFO]: Connection Recieved: 0
+[ALL]: Message Recieved From 0: Connect	ABRAXAS: GUARDIAN OF THE UNIVERSE!!!	
+[ALL]: Message Sent to: 0 Message: Startup	0	A1	YOU GOT IT!	
+
+[ERROR]: Socket Recieve Error: Connection reset by peer
