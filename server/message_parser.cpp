@@ -6,10 +6,10 @@ using namespace std;
 
 
 /**
- * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the 
- * contents of the afformentioned message string.
+ * Takes in a RAD protocol formatted message string that's intended to be received by the server, and 
+ * passes back a message struct corresponding to the contents of the afformentioned message string.
  */
-message message_parser::parse_message(string string_message)
+message message_parser::parse_client_message(string string_message)
 {
   //Put our message into a stringstream
   stringstream sstream(string_message);
@@ -56,4 +56,50 @@ message message_parser::parse_message(string string_message)
       msg.type = message_type::ERROR;
     }
   return msg;
+}
+
+/**
+ * Takes in a message struct that's intended to be sent to a client, 
+ * and returns a RAD protocl formatted message string that can be sent out to clients.
+ * 
+ */
+string message_parser::encode_client_message(message message)
+{
+  stringstream sstream;
+  //Build a message.
+  switch (message.type)
+    {
+    case message_type::CHANGE:
+      sstream << "Change\t";
+      sstream << message.cell_name << "\t";
+      sstream << message.cell_contents << "\t";
+      sstream << "\n";
+      break;
+    case message_type::STARTUP:
+      sstream << "Startup\t";
+      sstream << message.identifier << "\t";
+      //Add all the cells to the message.
+      for(unordered_map<string, string>::iterator iterator = message.cells.begin(); 
+	  iterator != message.cells.end(); iterator++)
+	{
+	  //Write the cell name.
+	  sstream << iterator->first << "\t";
+	  //Write the cell contents.
+	  sstream << iterator->second << "\t";
+	}
+      break;
+    case message_type::ISTYPING:
+      sstream << "IsTyping\t";
+      sstream << message.identifier << "\t";
+      sstream << message.cell_name << "\t";
+      sstream << "\n";
+      break;
+    case message_type::DONETYPING:
+      sstream << "DoneTyping\t";
+      sstream << message.identifier << "\t";
+      sstream << message.cell_name << "\t";
+      sstream << "\n";
+      break;
+    }
+  return sstream.str();
 }

@@ -2,13 +2,21 @@
 #define MESSAGE_PARSER_H
 
 #include <string>
+#include <unordered_map>
 namespace CS3505
 {
 
   /*
-   * Represents the type of a message. Message types are EDIT, UNDO, CONNECT, ISTYPING, DONETYPING, and ERROR.
+   * Represents the type of a message. 
+   * Client->Server Message types are EDIT, UNDO, CONNECT.
+   * Server->Client Message types are CHANGE, STARTUP.
+   * Shared message types are ISTYPING and DONETYPING.
+   * For errors, there's also an ERROR state.
    */
-  enum message_type {EDIT, UNDO, CONNECT, ISTYPING, DONETYPING, ERROR};
+  enum message_type {EDIT, UNDO, CONNECT,  
+		     CHANGE, STARTUP, 
+		     ISTYPING, DONETYPING,
+		     ERROR};
 
 
   /*
@@ -21,12 +29,14 @@ namespace CS3505
     message_type type;
     //The client identifier. Filled if we recieve an IsTyping and a DoneTyping.
     std::string identifier;
-    //The cell name. Only filled if the message is an Edit, IsTyping, or DoneTyping.
+    //The cell name. Only filled if the message is an Edit, Change, IsTyping, or DoneTyping.
     std::string cell_name;
     //The cell contents. Only filled if the message is an Edit.
     std::string cell_contents;
     //Spreadsheet name. Only filled if the message is a Connect.
     std::string sheet_name;
+    //An unordered map of cell names and cell contents. Only filled if the message is a Startup
+    std::unordered_map<std::string, std::string> cells;
   };
   /**
    * A class that has a single static method, parse_message, that takes a string as a parameter, and returns
@@ -42,7 +52,13 @@ namespace CS3505
      * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the 
      * contents of the afformentioned message string.
      */
-    static message parse_message(std::string string_msg);
+    static message parse_client_message(std::string string_msg);
+
+    /**
+     * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the 
+     * contents of the afformentioned message string.
+     */
+    static std::string encode_client_message(message message);
   };
 }
 #endif
