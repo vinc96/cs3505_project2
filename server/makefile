@@ -1,7 +1,7 @@
 server_start: main.cpp server.o
 	g++ main.cpp server.o logger.o message_parser.o socket_manager.o \
-	-o server_start -std=c++11 \
-	-Wl,-rpath,"/usr/local/lib" -lboost_system -g
+	spreadsheet_pool.o spreadsheet_controller.o \
+	-o server_start -std=c++11 -Wl,-rpath,"/usr/local/lib" -lboost_system -g
 server.o: server.h server.cpp message_parser.o socket_manager.o logger.o spreadsheet_controller.o
 	g++ -c server.cpp -std=c++11 -g
 socket_manager.o: socket_manager.h socket_manager.cpp  

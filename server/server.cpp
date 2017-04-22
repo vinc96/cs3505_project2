@@ -17,8 +17,9 @@ using namespace std;
  */
 void server::client_connected(std::string client_identifier)
 {
-
+  
 }
+
 /*
  * The function that's called when we recieve a complete, terminated message from some client.
  *
@@ -28,6 +29,8 @@ void server::client_connected(std::string client_identifier)
  */
 void server::message_received(std::string client_identifier, std::string message)
 {
+  //Parse the message and send it to our controller.
+  
 
 }
 /*
@@ -63,8 +66,10 @@ bool server::start()
   callbacks.client_disconnected = std::bind(&server::client_disconnected, this, std::placeholders::_1);
   
   networking = new socket_manager(callbacks);
-  //Insert other initialization code here.
-  
+  //Create the pool of spreadsheets
+  spreadsheets = new spreadsheet_pool();
+  //Instantiate the controller, and provide it callbacks to networking, and vice versa.
+  controller = new spreadsheet_controller(spreadsheets);
   //Log that the server started
   log->log("Server Started", loglevel::INFO);
   /*

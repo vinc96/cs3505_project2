@@ -16,7 +16,7 @@ namespace CS3505
   enum message_type {EDIT, UNDO, CONNECT,  
 		     CHANGE, STARTUP, 
 		     ISTYPING, DONETYPING,
-		     ERROR};
+		     MESSAGE_ERROR};
 
 
   /*
