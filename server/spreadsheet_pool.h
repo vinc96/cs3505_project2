@@ -28,7 +28,7 @@ namespace CS3505
      */
     spreadsheet_pool();
     ~spreadsheet_pool();
-    bool add_edit(std::string sheet_name, std::string cell_name, std::string cell_contents);
+    message add_edit(std::string sheet_name, std::string cell_name, std::string cell_contents);
     message undo_last_change_on_sheet(std::string sheet_name);
     message get_sheet_contents(std::string sheet_name);
     message get_cell_on_sheet(std::string sheet_name, std::string cell_name);
