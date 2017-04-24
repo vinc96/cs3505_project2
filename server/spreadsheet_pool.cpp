@@ -125,7 +125,7 @@ message spreadsheet_pool::get_sheet_contents(string sheet_name)
     const char *get_sheet_contents = string("SELECT DISTINCT cellName, cellContents FROM edits " \
                                          "WHERE undone is NULL AND " \
                                          "spreadsheet_id = (SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')"\
-                                         "ORDER BY max(id)").c_str();
+                                         "ORDER BY id DESC").c_str();
     char *error_message = 0;
     int rc = sqlite3_exec(db, get_sheet_contents, __sheet_contents, &cells, &error_message);
     if( rc != SQLITE_OK ){
