@@ -121,7 +121,7 @@ namespace CS3505
     //The size of the buffers that we're using for sockets.
     static const int buff_size = 1024;
     //The number of sockets that have connected to this manager, since the last time we had 0 clients.
-    int num_connected_sockets = 0;
+    int num_connected_sockets;
     //The struct containing the callbacks we want to execute when we recieve activity on the socket.
     network_callbacks callbacks;
     //The map containing our sockets, mapped to their unique identifiers.

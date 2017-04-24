@@ -27,16 +27,18 @@ void spreadsheet_controller::handle_message(message msg)
       send_client(msg.identifier, msg);
       break;
     case message_type::EDIT:
-      msg.type = message_type::CHANGE;
       break;
     case message_type::UNDO:
       break;
     case message_type::ISTYPING:
+      //Record that this client has an ISTYPING request.
       clients.at(msg.identifier).last_is_typing = msg.cell_name;
       //Relay the ISTYPING message to all clients.
       send_all(msg);
       break;
     case message_type::DONETYPING:
+      //Record that this cleint satisfied its ISTYPING request.
+      clients.at(msg.identifier).last_is_typing = "";
       //Relay the DONETYPING message to all clients.
       send_all(msg);
       break;     

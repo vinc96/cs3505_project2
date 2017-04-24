@@ -23,7 +23,7 @@ void socket_manager::do_work()
  */
 string socket_manager::generate_socket_name()
 {
-  num_connected_sockets++;
+  num_connected_sockets = num_connected_sockets + 1;
   return to_string(num_connected_sockets); //Placeholder.
 }
 
@@ -172,6 +172,8 @@ void socket_manager::handle_disconnect(socket_state *disconnected_socket)
 socket_manager::socket_manager(network_callbacks callbacks)
   : callbacks(callbacks)
 {
+  //Set the num_connected_sockets = 0
+  num_connected_sockets = 0;
   //Spawn a thread to do the async io work.
   work_thread = new thread(std::bind(&socket_manager::do_work, this));
   //Create the map for accepting sockets.
