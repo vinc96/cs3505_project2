@@ -173,6 +173,11 @@ namespace CS3505
      * Sends a message to all connected clients. Returns true if there's at least one client. false otherwise.
      */
     bool send_all(std::string message);
+
+    /*
+     * Kicks the specified client from the server. 
+     */
+    bool kick_client(std::string client_identifier);
   };
 }
 

@@ -1,3 +1,15 @@
 [INFO]: Networking accepting sockets..
 [INFO]: Server Started
 [INFO]: Connection Recieved: 1
+[ALL]: Message Received From 1: Connect	asdf	
+[ALL]: Getting sheet contents for: asdf
+[ALL]: Message Sent to: 1 Message: Startup	1	B11	We'll see	D6	The mighty Rio Grande	I13	The moster recent edit	E12	b	F13	Something	F16	Server	G19	Figure	G20	Out	E5	Things	E6	Crashed	C15	Face	I10	a	F15	My	I9	b	H7	d	H5	f	D17	Whyu 	A1	We move on paths of never ending light	D18	this 	H4	g	J16	h	H22	o	F17	Crashed	H24	with the	B4	3	H16	Connect\tASDF\t\n	H12	a	E9	a	G13	=A3	H11	asd	H21	t	G21	Why	H25	map 	F8	A Three Legged Workhorse	H27	store	I3	SomeTest	A5	=A10	H18	crash	A4	ASDF	H19	es	I20	b	A3	=G13	H17	Random	F10	a	J11	d	H15	\t\t\t\t\t\t\t\t	D21	This	G2	a	H29	In?	B2	1	G6	Something about you	H23	Do	H26	that I	C14	Smily	J17	g	J6	d	F4	d	F14	About	A10	=A5	J15	c	H20	Something	B5	=B2+B3+B4	G12	=TestFormula	B3	2	D16	I don't know	F2	Test	J12	shgia	I7	a	H28	Names	J7	What is	J10	thing	J8	t	G17	I n	D20	D19	J9	his	H6	e	G11	=TestFormula	G18	Need	D19	woudl fail?	
+
+[ALL]: Message Received From 1: Edit	
+[ALL]: Adding edit on sheet: asdf for cell:  with contents: 
+[ALL]: Message Sent to: 1 Message: Change			
+
+[ALL]: Message Received From 1: Broke
+[ERROR]: Cannot parse message: Broke Kicking client.
+[INFO]: Client Disconnected: 1
+[ERROR]: Socket Recieve Error: Operation canceled

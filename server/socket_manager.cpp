@@ -224,7 +224,7 @@ bool socket_manager::send_message(string message, string client_identifier)
   //If we don't have the socket registered, return false. 
   if (sockets->count(client_identifier) == 0)
     {
-      //return false;
+      return false;
     } 
   //Lock the manager grabbing the socket
   mtx.lock();
@@ -266,5 +266,24 @@ bool socket_manager::send_all(string message)
     {
       send_message(message, iterator->second->identifier); //Inefficient (2 hashmap lookups), but clean.
     }
+  return true;
+}
+
+/*
+ * Kicks the specified client from the server. Returns true if the client exists and has been kicked, false otherwise.
+ */
+bool socket_manager::kick_client(std::string client_identifier)
+{
+  //If we don't have the socket registered, return false. 
+  if (sockets->count(client_identifier) == 0)
+    {
+      return false;
+    } 
+  //Lock the manager grabbing the socket
+  mtx.lock();
+  socket_state *socket_state = sockets->at(client_identifier);
+  mtx.unlock();
+  //Disconnect the socket
+  handle_disconnect(socket_state);
   return true;
 }
