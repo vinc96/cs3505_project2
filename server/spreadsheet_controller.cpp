@@ -32,6 +32,23 @@ void spreadsheet_controller::handle_message(message msg)
       send.identifier = msg.identifier;
       //Send the startup message to that client
       send_client(msg.identifier,send);
+      //Send the IsTyping messages currently filled for each client on this spreadsheet
+      //Look through all of our clients, sending the message to the ones that are connected to this sheet.
+      for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
+	{
+	  if (it->second.spreadsheet == clients.at(msg.identifier).spreadsheet)
+	    {
+	      if (it->second.last_is_typing != "")
+		{
+		  //Build the IsTyping and send it.
+		  message istype;
+		  istype.type = message_type::ISTYPING;
+		  istype.identifier = it->first;
+		  istype.cell_name = it->second.last_is_typing;
+		  send_client(msg.identifier, istype);
+		}
+	    }
+	}
       break;
     case message_type::EDIT:
       //Make the change in the relevent spreadsheet, and get the relevent Change message.
