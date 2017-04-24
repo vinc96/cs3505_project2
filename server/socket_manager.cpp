@@ -118,7 +118,7 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 	  if (!socket_state->stream.eof())
 	    {
 	      //Log that we recieved a message.
-	      log->log(string("Message Recieved From ") + 
+	      log->log(string("Message Received From ") + 
 		       socket_state->identifier + string(": ") + 
 		       message, loglevel::ALL);
 	      callbacks.message_received(socket_state->identifier, message);
