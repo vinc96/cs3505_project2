@@ -38,13 +38,7 @@ message spreadsheet_pool::undo_last_change_on_sheet(string sheet_name)
   message new_contents;
   new_contents.type = message_type::MESSAGE_ERROR;
   new_contents.cell_name = "";
-  /*const char *undo_and_query = string("UPDATE edits SET undone = 1 WHERE id = "\
-                                        "(SELECT max(id) FROM edits "\
-                                          "WHERE undone IS NULL AND spreadsheet_id = "\
-                                              "(SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')"\
-                                        "); "\
-                                      "SELECT cell_name, cell_contents FROM table ORDER BY id DESC LIMIT 1 WHERE cell_name = undone is NULL").c_str();
-  */
+
   const char * get_undo_cell_name = sqlite3_mprintf(string("SELECT cell_name FROM edits "
                                            "WHERE undone IS NULL AND spreadsheet_id = "\
                                            "(SELECT id FROM spreadsheets WHERE name = %Q) "\
@@ -64,6 +58,7 @@ message spreadsheet_pool::undo_last_change_on_sheet(string sheet_name)
   }
   else
   {
+    new_contents.type = message_type::CHANGE;
     const char * set_undone_and_query = sqlite3_mprintf(string("UPDATE edits SET undone = 1 WHERE id = " \
                                                "(SELECT max(id) FROM edits " \
                                                  "WHERE undone IS NULL AND spreadsheet_id = " \
