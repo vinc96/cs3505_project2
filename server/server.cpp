@@ -38,8 +38,18 @@ void server::message_received(std::string client_identifier, std::string message
   if (parsed_msg.type == message_type::MESSAGE_ERROR)
     {
       log->log(string("Cannot parse message: ") + message_str, loglevel::WARNING);
-      log->log(string(" Kicking client: ") + client_identifier, loglevel::WARNING);
+      log->log(string("Kicking client: ") + client_identifier, loglevel::WARNING);
       networking->kick_client(client_identifier);
+    }
+  else if (parsed_msg.type == message_type::ISTYPING || parsed_msg.type == message_type::DONETYPING)
+    {
+      //If we have a mismatched client identifier, kick the client from the server.
+      if (parsed_msg.identifier != client_identifier)
+	{
+	  log->log(string("Mismatched Client identifier: ") + message_str, loglevel::WARNING);
+	  log->log(string("Kicking client: ") + client_identifier, loglevel::WARNING);
+	  networking->kick_client(client_identifier);
+	}
     }
   else
     {
