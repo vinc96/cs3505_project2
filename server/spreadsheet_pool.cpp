@@ -196,11 +196,11 @@ message spreadsheet_pool::add_edit(string sheet_name, string cell_name, string c
   log->log("Adding edit on sheet: " + sheet_name + " for cell: " + cell_name + " with contents: " + cell_contents, loglevel::ALL);
 
   const char *spreadsheetTableCreate = string("INSERT INTO edits" \
-                                              "SET cell_name = '"+cell_name+"',"\
-                                              "cell_contents = '"+cell_contents+"',"\
-                                              "spreadsheet_id = (SELECT id"\
+                                              "(cell_name, cell_contents,spreadsheet_id) VALUES "\
+                                              "('"+cell_name+"','"+cell_contents+"',"\
+                                              "(SELECT id"\
                                               "FROM spreadsheets" \
-                                              "WHERE name = '"+sheet_name+"')").c_str();
+                                              "WHERE name = '"+sheet_name+"'))").c_str();
   char *error_message = 0;
   int rc = sqlite3_exec(db, spreadsheetTableCreate, __generic_callback, 0, &error_message);
   if( rc != SQLITE_OK ){
