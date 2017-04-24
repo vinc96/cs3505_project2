@@ -50,6 +50,10 @@ void server::message_received(std::string client_identifier, std::string message
 	  log->log(string("Kicking client: ") + client_identifier, loglevel::WARNING);
 	  networking->kick_client(client_identifier);
 	}
+      else
+	{
+	  controller->handle_message(parsed_msg);
+	}
     }
   else
     {
