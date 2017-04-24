@@ -1,27 +1,9 @@
 [INFO]: Networking accepting sockets..
-[INFO]: Initializing Database Tables
 [INFO]: Server Started
 [INFO]: Connection Recieved: 1
 [ALL]: Message Recieved From 1: Connect	asdf	
-[ALL]: Message Sent to: 1 Message: Startup	1	A1	YOU GOT IT!	
-
-[INFO]: Connection Recieved: 2
-[ALL]: Message Recieved From 2: Connect	asdf	
-[ALL]: Message Sent to: 2 Message: Startup	2	A1	YOU GOT IT!	
-
-[ALL]: Message Recieved From 2: IsTyping	2	C5
-[ALL]: Message Sent: IsTyping	2	C5	
-
-[ALL]: Message Recieved From 2: Edit	C5	a
-[ALL]: Message Recieved From 2: DoneTyping	2	D9
-[ALL]: Message Sent: DoneTyping	2	D9	
-
-[WARNING]: Client lost connection: 2
-[INFO]: Client Disconnected: 2
-[INFO]: Connection Recieved: 3
-[ALL]: Message Recieved From 3: Connect	asdf	
-[ALL]: Message Sent to: 3 Message: Startup	3	A1	YOU GOT IT!	
-
-[WARNING]: Client lost connection: 3
-[INFO]: Client Disconnected: 3
-[ERROR]: Socket Recieve Error: Operation canceled
+[INFO]: Creating new spreadsheet named: asdf
+[ERROR]: SQL Error:near "'asdf'": syntax error
+[ALL]: Getting sheet contents for: asdf
+[ERROR]: SQL Error:RIGHT and FULL OUTER JOINs are not currently supported
+[ALL]: Message Sent to: 1 Message: 

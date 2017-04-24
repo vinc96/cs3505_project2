@@ -11,7 +11,10 @@ namespace CS3505
 {
   struct client
   {
+    //The last IsTyping message we received without an acompanying DoneTyping.
     std::string last_is_typing;
+    //The spreadsheet the client is currently connected to.
+    std::string spreadsheet = "";
   };
   /**
    * Represents a controller object that responds to messages recieved from the client.

@@ -1,6 +1,8 @@
 #include "spreadsheet_controller.h"
+#include <string>
 
 using namespace CS3505;
+using namespace std;
 
 /**
  * Creates a new spreadsheet_controller object with the specified sheet pool.
@@ -18,17 +20,41 @@ spreadsheet_controller::spreadsheet_controller(spreadsheet_pool *sheets)
  */
 void spreadsheet_controller::handle_message(message msg)
 {
+  message send; //In most cases, the message we choose to send to the clients.
   switch(msg.type)
     {
     case message_type::CONNECT:
-      //PLACEHOLDER: SEND A STARTUP WITH A SINGLE CELL AS "YOU GOT IT!, ID of 0."
-      msg.type = message_type::STARTUP;
-      msg.cells.emplace("A1", "YOU GOT IT!");
-      send_client(msg.identifier, msg);
+      //Record which spreadsheet this client is currently connected to
+      clients.at(msg.identifier).spreadsheet = msg.sheet_name;
+      //Get the startup message we want to send to the client.
+      send = sheets->get_sheet_contents(msg.sheet_name);
+      //Fill in the identifier for the send message
+      send.identifier = msg.identifier;
+      //Send the startup message to that client
+      send_client(msg.identifier,send);
       break;
     case message_type::EDIT:
+      //Make the change in the relevent spreadsheet, and get the relevent Change message.
+      send = sheets->add_edit(clients.at(msg.identifier).spreadsheet,
+				      msg.cell_name, msg.cell_contents);
+      //Send the Change message we got to the clients.
+      send_all(send);
       break;
     case message_type::UNDO:
+      //Make the undo change.
+      send = sheets->undo_last_change_on_sheet(
+					       clients.at(msg.identifier).spreadsheet);
+      if (send.type == message_type::MESSAGE_ERROR)
+	{
+	  //Log that we didn't return an UNDO, because there was nothing to UNDO.
+	  logger::get_logger()->log(string("Didn't execute Undo from ") + msg.identifier +
+				    string(", as there was nothing to undo"), loglevel::INFO);
+	}
+      else
+	{
+	  //Send the Change message we got to the clients.
+	  send_all(send);
+	}
       break;
     case message_type::ISTYPING:
       //Record that this client has an ISTYPING request.
