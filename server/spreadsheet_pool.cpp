@@ -36,7 +36,7 @@ message spreadsheet_pool::undo_last_change_on_sheet(string sheet_name)
                                           "WHERE undone IS NULL AND spreadsheet_id = "\
                                               "(SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')"\
                                         "); "\
-                                      "SELECT cell_name, cell_contents FROM table ORDER BY id DESC LIMIT 1 WHERE undone is NULL").c_str();
+                                      "SELECT cell_name, cell_contents FROM table ORDER BY id DESC LIMIT 1 WHERE cell_name = undone is NULL").c_str();
   char *error_message = 0;
   int rc = sqlite3_exec(db, undo_and_query, __last_change, &new_contents, &error_message);
   if( rc != SQLITE_OK ){
@@ -93,9 +93,9 @@ message spreadsheet_pool::get_sheet_contents(string sheet_name)
     message spreadsheet_contents;
     spreadsheet_contents.type = message_type::STARTUP;
     std::unordered_map<std::string, std::string> cells;
-    const char *get_sheet_contents = string("SELECT DISTINCT cellName, cellContents FROM spreadsheets s " \
-                                         "RIGHT JOIN edits e on s.id = e.spreadsheet_id " \
-                                         "WHERE s.name = '"+sheet_name+"' AND e.undone is NULL" \
+    const char *get_sheet_contents = string("SELECT DISTINCT cellName, cellContents FROM edits " \
+                                         "WHERE undone is NULL AND " \
+                                         "spreadsheet_id = (SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')"\
                                          "ORDER BY max(e.id)").c_str();
     char *error_message = 0;
     int rc = sqlite3_exec(db, get_sheet_contents, __sheet_contents, &cells, &error_message);
@@ -129,10 +129,10 @@ message spreadsheet_pool::get_cell_on_sheet(string sheet_name, string cell_name)
   }
   log->log(string("Getting sheet contents for: "+sheet_name), loglevel::ALL);
   string cell_contents = "";
-  const char *get_cell = string("SELECT cellContents FROM spreadsheets s " \
-                                       "RIGHT JOIN edits e on s.id = e.spreadsheet_id " \
-                                       "WHERE s.name = '"+sheet_name+"' AND e.undone is NULL AND e.cell_name = '"+cell_name+"'" \
-                                       "ORDER BY max(e.id)").c_str();
+  const char *get_cell = string("SELECT cellContents FROM edits"
+                                "WHERE undone is NULL AND e.cell_name = '"+cell_name+"' AND "\
+                                "spreadsheet_id = (SELECT id from spreadsheets WHERE name = '"+sheet_name+"')" \
+                                "ORDER BY max(e.id)").c_str();
   char *error_message = 0;
   int rc = sqlite3_exec(db, get_cell, __cell_on_sheet, &cell_contents, &error_message);
   if( rc != SQLITE_OK ){
