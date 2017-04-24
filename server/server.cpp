@@ -37,7 +37,8 @@ void server::message_received(std::string client_identifier, std::string message
   parsed_msg = message_parser::parse_client_message(message_str, client_identifier);
   if (parsed_msg.type == message_type::MESSAGE_ERROR)
     {
-      log->log(string("Cannot parse message: ") + message_str + string(" Kicking client."), loglevel::ERROR);
+      log->log(string("Cannot parse message: ") + message_str, loglevel::WARNING);
+      log->log(string(" Kicking client: ") + client_identifier, loglevel::WARNING);
       networking->kick_client(client_identifier);
     }
   else
