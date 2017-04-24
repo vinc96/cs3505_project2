@@ -201,6 +201,7 @@ message spreadsheet_pool::add_edit(string sheet_name, string cell_name, string c
                                               "(SELECT id "\
                                               "FROM spreadsheets " \
                                               "WHERE name = %Q))").c_str(), cell_name.c_str(), cell_contents.c_str(), sheet_name.c_str());
+  log->log("Query: " + string(spreadsheetTableCreate), loglevel::ALL);
   char *error_message = 0;
   int rc = sqlite3_exec(db, spreadsheetTableCreate, __generic_callback, 0, &error_message);
   if( rc != SQLITE_OK ){
