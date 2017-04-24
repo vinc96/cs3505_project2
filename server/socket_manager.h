@@ -30,8 +30,12 @@ namespace CS3505
 
     ~socket_state()
     {
+      /*
+      //Shutdown our socket.
+      socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
       //Close the socket.
       socket.close();
+      */
       //Free our buffer.
       delete(receive_buffer);
       //If our send_buffers queue isn't empty, free the buffers.
@@ -67,6 +71,10 @@ namespace CS3505
      * The buffer that our socket writes data from.
      */
     std::queue<char*, std::list<char*> > send_buffers;
+    /*
+     * Records whether or not we've closed this socket or not
+     */
+    bool is_closed = false;
   };
 
   //Typedefs:
@@ -173,6 +181,11 @@ namespace CS3505
      * Sends a message to all connected clients. Returns true if there's at least one client. false otherwise.
      */
     bool send_all(std::string message);
+
+    /*
+     * Kicks the specified client from the server. 
+     */
+    bool kick_client(std::string client_identifier);
   };
 }
 

@@ -19,12 +19,12 @@ void socket_manager::do_work()
 }
 
 /*
- * Generates a socket string name unique among the existing sockets.
+ * Generates a socket string name (integer) unique among the existing sockets.
  */
 string socket_manager::generate_socket_name()
 {
   num_connected_sockets = num_connected_sockets + 1;
-  return to_string(num_connected_sockets); //Placeholder.
+  return to_string(num_connected_sockets); //Assign socket IDs sequentially
 }
 
 /*
@@ -35,7 +35,7 @@ void socket_manager::accept_socket(socket_state *socket, const boost::system::er
   logger *log = logger::get_logger();
   if (error_code)
     {
-      log->log(string("Socket Accept Error: ") + error_code.message(), loglevel::ERROR);
+      log->log(string("Socket Accept Error: ") + error_code.message(), loglevel::WARNING);
     }
   else
     {
@@ -86,7 +86,7 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 	}
       else
 	{
-	  log->log(string("Socket Recieve Error: ") + error_code.message(), loglevel::ERROR);
+	  log->log(string("Socket Recieve Error: ") + error_code.message(), loglevel::WARNING);
 	}
     }
   else
@@ -160,6 +160,8 @@ void socket_manager::handle_disconnect(socket_state *disconnected_socket)
   delete(disconnected_socket);
   //Unlock
   mtx.unlock();
+  //Call the handler for disconnecting sockets.
+  callbacks.client_disconnected(disconnected_socket->identifier);
 }
 
 /*
@@ -222,7 +224,7 @@ bool socket_manager::send_message(string message, string client_identifier)
   //If we don't have the socket registered, return false. 
   if (sockets->count(client_identifier) == 0)
     {
-      //return false;
+      return false;
     } 
   //Lock the manager grabbing the socket
   mtx.lock();
@@ -265,4 +267,32 @@ bool socket_manager::send_all(string message)
       send_message(message, iterator->second->identifier); //Inefficient (2 hashmap lookups), but clean.
     }
   return true;
+}
+
+/*
+ * Kicks the specified client from the server. Returns true if the client exists and has been kicked, false otherwise.
+ */
+bool socket_manager::kick_client(std::string client_identifier)
+{
+  //If we don't have the socket registered, return false. 
+  if (sockets->count(client_identifier) == 0)
+    {
+      return false;
+    } 
+  //Lock the manager grabbing the socket
+  mtx.lock();
+  socket_state *socket_state = sockets->at(client_identifier);
+  mtx.unlock();
+  //Check to see if the socket has been closed yet
+  if (!socket_state->is_closed)
+    {
+      //Shutdown our socket.
+      socket_state->socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+      //Close the socket.
+      socket_state->socket.close();
+      //Mark the socket as closed
+      socket_state->is_closed = true;
+      return true; 
+    }
+  return false; //The socket is waiting to be cleaned up.
 }
