@@ -260,7 +260,7 @@ spreadsheet_pool::spreadsheet_pool()
 
      const char *editTableCreate = "CREATE TABLE IF NOT EXISTS edits(" \
                                    "id INTEGER PRIMARY KEY," \
-                                   "FOREIGN KEY(spreadsheet_id) REFERENCES spreadsheets(id)," \
+                                   "spreadsheet_id INTEGER NOT NULL", \
                                    "cell_name TEXT," \
                                    "cell_contents TEXT," \
                                    "undone INTEGER)";
