@@ -196,8 +196,8 @@ message spreadsheet_pool::add_edit(string sheet_name, string cell_name, string c
   log->log("Adding edit on sheet: " + sheet_name + " for cell: " + cell_name + " with contents: " + cell_contents, loglevel::ALL);
 
   const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO edits " \
-                                              "(id,cell_name,cell_contents,spreadsheet_id) VALUES "\
-                                              "(NULL,%Q,%Q,"\
+                                              "(id,cell_name,cell_contents,undone,spreadsheet_id) VALUES "\
+                                              "(NULL,%Q,%Q,NULL,"\
                                               "(SELECT id "\
                                               "FROM spreadsheets " \
                                               "WHERE name = %Q))").c_str(), cell_name.c_str(), cell_contents.c_str(), sheet_name.c_str());
@@ -249,7 +249,7 @@ spreadsheet_pool::spreadsheet_pool()
     log->log("Initializing Database Tables", loglevel::INFO);
 
     const char *spreadsheetTableCreate = "CREATE TABLE IF NOT EXISTS spreadsheets(" \
-                                         "id INT primary_key," \
+                                         "id INTEGER PRIMARY KEY," \
                                          "name TEXT)";
     char *error_message = 0;
     rc = sqlite3_exec(db, spreadsheetTableCreate, __generic_callback, 0, &error_message);
@@ -259,8 +259,8 @@ spreadsheet_pool::spreadsheet_pool()
      }
 
      const char *editTableCreate = "CREATE TABLE IF NOT EXISTS edits(" \
-                                   "id INT primary_key," \
-                                   "spreadsheet_id INT foreign_key NOT NULL," \
+                                   "id INTEGER PRIMARY KEY," \
+                                   "spreadsheet_id INTEGER FOREIGN KEY NOT NULL," \
                                    "cell_name TEXT," \
                                    "cell_contents TEXT," \
                                    "undone INTEGER)";
