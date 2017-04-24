@@ -15,10 +15,7 @@ int main ()
   server our_server;
   //Start the server. Once the server exits, this will return 0 if all is well, and some other number otherwise.
   cout << "Server Starting..." << endl;
-  if (our_server.start())
-    {
-      cout << "Server Started Successfully" << endl;
-    }
+  our_server.start();
   //Listen for console commands.
   string command;
   while (our_server.is_running())

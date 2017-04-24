@@ -160,6 +160,8 @@ void socket_manager::handle_disconnect(socket_state *disconnected_socket)
   delete(disconnected_socket);
   //Unlock
   mtx.unlock();
+  //Call the handler for disconnecting sockets.
+  callbacks.client_disconnected(disconnected_socket->identifier);
 }
 
 /*

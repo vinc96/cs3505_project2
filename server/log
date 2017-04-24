@@ -1,9 +1,3 @@
 [INFO]: Networking accepting sockets..
 [INFO]: Server Started
 [INFO]: Connection Recieved: 1
-[ALL]: Message Recieved From 1: Connect	asdf	
-[INFO]: Creating new spreadsheet named: asdf
-[ERROR]: SQL Error:near "'asdf'": syntax error
-[ALL]: Getting sheet contents for: asdf
-[ERROR]: SQL Error:RIGHT and FULL OUTER JOINs are not currently supported
-[ALL]: Message Sent to: 1 Message: 
