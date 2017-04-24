@@ -249,7 +249,7 @@ spreadsheet_pool::spreadsheet_pool()
     log->log("Initializing Database Tables", loglevel::INFO);
 
     const char *spreadsheetTableCreate = "CREATE TABLE IF NOT EXISTS spreadsheets(" \
-                                         "id INT primary_key NOT NULL," \
+                                         "id INT primary_key," \
                                          "name TEXT)";
     char *error_message = 0;
     rc = sqlite3_exec(db, spreadsheetTableCreate, __generic_callback, 0, &error_message);
@@ -259,7 +259,7 @@ spreadsheet_pool::spreadsheet_pool()
      }
 
      const char *editTableCreate = "CREATE TABLE IF NOT EXISTS edits(" \
-                                   "id INT primary_key NOT NULL," \
+                                   "id INT primary_key," \
                                    "spreadsheet_id INT foreign_key NOT NULL," \
                                    "cell_name TEXT," \
                                    "cell_contents TEXT," \
