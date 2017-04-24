@@ -5,6 +5,8 @@
 #include <tuple>
 #include "sqlite3.h"
 #include "message_parser.h"
+#include "logger.h"
+#include <vector>
 
 namespace CS3505
 {
@@ -15,7 +17,10 @@ namespace CS3505
   {
   private:
     void new_spreadsheet(std::string sheet_name);
+    bool doesTableExist(std::string table_name);
+    bool doesSheetExist(std::string sheet_name);
     sqlite3 *db;
+    logger *log;
 
   public:
     /**
@@ -23,10 +28,10 @@ namespace CS3505
      */
     spreadsheet_pool();
     ~spreadsheet_pool();
-    bool edit_sheet(std::string sheet_name, std::string cell_name, std::string cell_contents);
+    bool add_edit(std::string sheet_name, std::string cell_name, std::string cell_contents);
     message undo_last_change_on_sheet(std::string sheet_name);
     message get_sheet_contents(std::string sheet_name);
-    message get_cell_for_sheet(std::string sheet_name, std::string cell_name);
+    message get_cell_on_sheet(std::string sheet_name, std::string cell_name);
   };
 }
 
