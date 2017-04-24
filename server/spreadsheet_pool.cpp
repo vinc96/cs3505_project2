@@ -124,7 +124,7 @@ message spreadsheet_pool::get_sheet_contents(string sheet_name)
     std::unordered_map<std::string, std::string> cells;
     const char *get_sheet_contents = sqlite3_mprintf(string("SELECT DISTINCT cell_name, cell_contents FROM edits " \
                                          "WHERE undone is NULL AND " \
-                                         "spreadsheet_id = (SELECT id FROM spreadsheets WHERE name = %Q)"\
+                                         "spreadsheet_id = (SELECT id FROM spreadsheets WHERE name = %Q) "\
                                          "ORDER BY id DESC").c_str(), sheet_name.c_str());
     char *error_message = 0;
     int rc = sqlite3_exec(db, get_sheet_contents, __sheet_contents, &cells, &error_message);
@@ -158,7 +158,7 @@ message spreadsheet_pool::get_cell_on_sheet(string sheet_name, string cell_name)
   }
   log->log(string("Getting sheet contents for: "+sheet_name), loglevel::ALL);
   string cell_contents = "";
-  const char *get_cell = sqlite3_mprintf(string("SELECT cell_contents FROM edits"
+  const char *get_cell = sqlite3_mprintf(string("SELECT cell_contents FROM edits "
                                 "WHERE undone is NULL AND e.cell_name = %Q AND "\
                                 "spreadsheet_id = (SELECT id from spreadsheets WHERE name = %Q) " \
                                 "ORDER BY max(e.id)").c_str(), cell_name.c_str(), sheet_name.c_str());
