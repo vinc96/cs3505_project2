@@ -9,11 +9,18 @@ static int __generic_callback(void* not_used, int columns, char** data, char** c
   return 1;
 }
 
-static int __last_change(void* cell_message, int columns, char** data, char** columnNames)
+static int __undo_cell_name(void* cell_message, int columns, char** data, char** columnNames)
 {
     message* new_cell = static_cast< message* >(cell_message);
     new_cell->cell_name = data[0];
-    new_cell->cell_contents = data[1];
+    // Success:
+    return 0;
+}
+
+static int __last_value(void* cell_message, int columns, char** data, char** columnNames)
+{
+    message* new_cell = static_cast< message* >(cell_message);
+    new_cell->cell_contents = data[0];
     // Success:
     return 0;
 }
@@ -31,28 +38,50 @@ message spreadsheet_pool::undo_last_change_on_sheet(string sheet_name)
   message new_contents;
   new_contents.type = message_type::MESSAGE_ERROR;
   new_contents.cell_name = "";
-  const char *undo_and_query = string("UPDATE edits SET undone = 1 WHERE id = "\
+  /*const char *undo_and_query = string("UPDATE edits SET undone = 1 WHERE id = "\
                                         "(SELECT max(id) FROM edits "\
                                           "WHERE undone IS NULL AND spreadsheet_id = "\
                                               "(SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')"\
                                         "); "\
                                       "SELECT cell_name, cell_contents FROM table ORDER BY id DESC LIMIT 1 WHERE cell_name = undone is NULL").c_str();
+  */
+  const char * get_undo_cell_name = string("SELECT cell_name FROM edits "
+                                           "WHERE undone IS NULL AND spreadsheet_id = "\
+                                           "(SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"') "\
+                                           "ORDER BY id DESC LIMIT 1").c_str();
   char *error_message = 0;
-  int rc = sqlite3_exec(db, undo_and_query, __last_change, &new_contents, &error_message);
+  int rc = sqlite3_exec(db, get_undo_cell_name, __undo_cell_name, &new_contents, &error_message);
   if( rc != SQLITE_OK ){
       log->log(string("SQL Error:"+string(error_message)), loglevel::ERROR);
       sqlite3_free(error_message);
-      message error_message;
-      error_message.type = message_type::MESSAGE_ERROR;
-      return error_message;
+      message e_message;
+      e_message.type = message_type::MESSAGE_ERROR;
+      return e_message;
   }
-  if(new_contents.cell_name != "")
+  if(new_contents.cell_name == "")
   {
-    new_contents.type = message_type::CHANGE;
+    return new_contents;
   }
   else
   {
-    log->log(string("No more edits to undo for :"+sheet_name), loglevel::ALL);
+    const char * set_undone_and_query = string("UPDATE edits SET undone = 1 WHERE id = " \
+                                               "(SELECT max(id) FROM edits " \
+                                                 "WHERE undone IS NULL AND spreadsheet_id = " \
+                                                     "(SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')" \
+                                               "); " \
+                                               "SELECT cell_contents FROM edits " \
+                                               "WHERE cell_name = '"+new_contents.cell_name+"' AND " \
+                                               "undone is NULL AND spreadsheet_id = " \
+                                               "(SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')").c_str();
+    char *error_message = 0;
+    int rc = sqlite3_exec(db, set_undone_and_query, __last_value, &new_contents, &error_message);
+    if( rc != SQLITE_OK ){
+        log->log(string("SQL Error:"+string(error_message)), loglevel::ERROR);
+        sqlite3_free(error_message);
+        message e_message;
+        e_message.type = message_type::MESSAGE_ERROR;
+        return e_message;
+    }
   }
   return new_contents;
 }
@@ -96,15 +125,15 @@ message spreadsheet_pool::get_sheet_contents(string sheet_name)
     const char *get_sheet_contents = string("SELECT DISTINCT cellName, cellContents FROM edits " \
                                          "WHERE undone is NULL AND " \
                                          "spreadsheet_id = (SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')"\
-                                         "ORDER BY max(e.id)").c_str();
+                                         "ORDER BY max(id)").c_str();
     char *error_message = 0;
     int rc = sqlite3_exec(db, get_sheet_contents, __sheet_contents, &cells, &error_message);
     if( rc != SQLITE_OK ){
         log->log(string("SQL Error:"+string(error_message)), loglevel::ERROR);
         sqlite3_free(error_message);
-        message error_message;
-        error_message.type = message_type::MESSAGE_ERROR;
-        return error_message;
+        message e_message;
+        e_message.type = message_type::MESSAGE_ERROR;
+        return e_message;
     }
     spreadsheet_contents.cells = cells;
     return spreadsheet_contents;
@@ -138,9 +167,9 @@ message spreadsheet_pool::get_cell_on_sheet(string sheet_name, string cell_name)
   if( rc != SQLITE_OK ){
       log->log(string("SQL Error:"+string(error_message)), loglevel::ERROR);
       sqlite3_free(error_message);
-      message error_message;
-      error_message.type = message_type::MESSAGE_ERROR;
-      return error_message;
+      message e_message;
+      e_message.type = message_type::MESSAGE_ERROR;
+      return e_message;
   }
   message single_cell;
   single_cell.type = message_type::CHANGE;
@@ -153,7 +182,7 @@ void spreadsheet_pool::new_spreadsheet(string sheet_name)
 {
   log->log("Creating new spreadsheet named: " + sheet_name, loglevel::INFO);
 
-  const char *spreadsheetTableCreate = string("INSERT INTO spreadsheets (name) VALUES '"+sheet_name+"'").c_str();
+  const char *spreadsheetTableCreate = string("INSERT INTO spreadsheets (name) VALUES ('"+sheet_name+"')").c_str();
   char *error_message = 0;
   int rc = sqlite3_exec(db, spreadsheetTableCreate, __generic_callback, 0, &error_message);
   if( rc != SQLITE_OK ){
@@ -177,9 +206,9 @@ message spreadsheet_pool::add_edit(string sheet_name, string cell_name, string c
   if( rc != SQLITE_OK ){
       log->log(string("SQL Error:"+string(error_message)), loglevel::ERROR);
       sqlite3_free(error_message);
-      message error_message;
-      error_message.type = message_type::MESSAGE_ERROR;
-      return error_message;
+      message e_message;
+      e_message.type = message_type::MESSAGE_ERROR;
+      return e_message;
    }
    message change_message;
    change_message.type = message_type::CHANGE;
