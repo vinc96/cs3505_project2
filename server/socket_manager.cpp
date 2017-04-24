@@ -283,10 +283,16 @@ bool socket_manager::kick_client(std::string client_identifier)
   mtx.lock();
   socket_state *socket_state = sockets->at(client_identifier);
   mtx.unlock();
-  //Disconnect the socket
-  //Shutdown our socket.
-  socket_state->socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
-  //Close the socket.
-  socket_state->socket.close();
-  return true;
+  //Check to see if the socket has been closed yet
+  if (!socket_state->is_closed)
+    {
+      //Shutdown our socket.
+      socket_state->socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+      //Close the socket.
+      socket_state->socket.close();
+      //Mark the socket as closed
+      socket_state->is_closed = true;
+      return true; 
+    }
+  return false; //The socket is waiting to be cleaned up.
 }

@@ -71,6 +71,10 @@ namespace CS3505
      * The buffer that our socket writes data from.
      */
     std::queue<char*, std::list<char*> > send_buffers;
+    /*
+     * Records whether or not we've closed this socket or not
+     */
+    bool is_closed = false;
   };
 
   //Typedefs:
