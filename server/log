@@ -1,7 +1,8 @@
 [INFO]: Networking accepting sockets..
 [INFO]: Server Started
-[INFO]: Connection Recieved: 0
-[ALL]: Message Recieved From 0: Connect	ABRAXAS: GUARDIAN OF THE UNIVERSE!!!	
-[ALL]: Message Sent to: 0 Message: Startup	0	A1	YOU GOT IT!	
+[INFO]: Connection Recieved: 1
+[ALL]: Message Recieved From 1: Connect	asdf	
+[ALL]: Message Sent to: 1 Message: Startup	1	A1	YOU GOT IT!	
 
-[ERROR]: Socket Recieve Error: Connection reset by peer
+[WARNING]: Client lost connection: 1
+[INFO]: Client Disconnected: 1

@@ -18,7 +18,7 @@ using namespace std;
  */
 void server::client_connected(std::string client_identifier)
 {
-  
+  controller->register_client(client_identifier);
 }
 
 /*
@@ -34,7 +34,7 @@ void server::message_received(std::string client_identifier, std::string message
   logger *log = logger::get_logger();
   //Parse the message and send it to our controller, as long as we didn't log an error.
   message parsed_msg;
-  parsed_msg = message_parser::parse_client_message(message_str);
+  parsed_msg = message_parser::parse_client_message(message_str, client_identifier);
   if (parsed_msg.type == message_type::MESSAGE_ERROR)
     {
       log->log(string("Cannot parse message: ") + message_str, loglevel::ERROR);
@@ -54,7 +54,7 @@ void server::message_received(std::string client_identifier, std::string message
  */
 void server::client_disconnected(std::string client_identifier)
 {
-
+  controller->deregister_client(client_identifier);
 }
 
   

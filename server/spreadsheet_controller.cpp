@@ -23,24 +23,23 @@ void spreadsheet_controller::handle_message(message msg)
     case message_type::CONNECT:
       //PLACEHOLDER: SEND A STARTUP WITH A SINGLE CELL AS "YOU GOT IT!, ID of 0."
       msg.type = message_type::STARTUP;
-      msg.identifier = "0";
       msg.cells.emplace("A1", "YOU GOT IT!");
       send_client(msg.identifier, msg);
       break;
     case message_type::EDIT:
+      msg.type = message_type::CHANGE;
       break;
     case message_type::UNDO:
       break;
     case message_type::ISTYPING:
-      //Simply relay the ISTYPING message to all clients.
+      clients.at(msg.identifier).last_is_typing = msg.cell_name;
+      //Relay the ISTYPING message to all clients.
       send_all(msg);
       break;
     case message_type::DONETYPING:
-      //Simply relay the DONETYPING message to all clients.
+      //Relay the DONETYPING message to all clients.
       send_all(msg);
-      break;
-
-      
+      break;     
     }
 }
 
@@ -50,7 +49,9 @@ void spreadsheet_controller::handle_message(message msg)
  */
 void spreadsheet_controller::register_client(std::string client_identifier)
 {
-
+  //Add a struct corresponding to this client to our clients map
+  client cli;
+  clients.emplace(client_identifier, cli);
 }
 
 /**
@@ -59,7 +60,17 @@ void spreadsheet_controller::register_client(std::string client_identifier)
  */
 void spreadsheet_controller::deregister_client(std::string client_identifier)
 {
-
+  //If this client hasn't sent a DoneTyping message corresponding to its last IsTyping, send the DoneTyping.
+  if (clients.at(client_identifier).last_is_typing != "")
+    {
+      message msg;
+      msg.type = message_type::DONETYPING;
+      msg.identifier = client_identifier;
+      msg.cell_name = clients.at(client_identifier).last_is_typing;
+      send_all(msg);
+    }
+  //Remove the client from our list of clients
+  clients.erase(client_identifier);
 }
 
 

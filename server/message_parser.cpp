@@ -6,10 +6,11 @@ using namespace std;
 
 
 /**
- * Takes in a RAD protocol formatted message string that's intended to be received by the server, and 
- * passes back a message struct corresponding to the contents of the afformentioned message string.
+ * Takes in a RAD protocol formatted message string that's intended to be received by the server 
+ * and the client identifier it was sent from,  and passes back a message struct corresponding to 
+ * the contents of the afformentioned message string.
  */
-message message_parser::parse_client_message(string string_message)
+message message_parser::parse_client_message(string string_message, string ident)
 {
   //Put our message into a stringstream
   stringstream sstream(string_message);
@@ -18,6 +19,7 @@ message message_parser::parse_client_message(string string_message)
   getline(sstream, token, '\t');
   //Declare message type depending on what we parsed.
   message msg;
+  msg.identifier = ident;
   if (token == "Edit")
     {
       msg.type = message_type::EDIT;

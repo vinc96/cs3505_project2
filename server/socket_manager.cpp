@@ -23,7 +23,8 @@ void socket_manager::do_work()
  */
 string socket_manager::generate_socket_name()
 {
-  return "0"; //Placeholder.
+  num_connected_sockets++;
+  return to_string(num_connected_sockets); //Placeholder.
 }
 
 /*
@@ -78,6 +79,11 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 	{
 	  handle_disconnect(socket_state);
 	}
+      else if (error_code == error::connection_reset)
+	{
+	  log->log(string("Client lost connection: ") + socket_state->identifier, loglevel::WARNING);
+	  handle_disconnect(socket_state);
+	}
       else
 	{
 	  log->log(string("Socket Recieve Error: ") + error_code.message(), loglevel::ERROR);
@@ -85,6 +91,11 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
     }
   else
     {
+      //If we didn't get an EOF, but we got a bytes read of 0, disconnect.
+      if (bytes_read == 0)
+	{
+	  handle_disconnect(socket_state);
+	}
       //Start reading again
       socket_state->socket.async_read_some(buffer(socket_state->receive_buffer, buff_size), 
 					   boost::bind(&socket_manager::read_data, 

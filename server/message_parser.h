@@ -27,7 +27,7 @@ namespace CS3505
   {
     //The type of the message.
     message_type type;
-    //The client identifier. Filled if we recieve an IsTyping and a DoneTyping.
+    //The client identifier. Should always be filled.
     std::string identifier;
     //The cell name. Only filled if the message is an Edit, Change, IsTyping, or DoneTyping.
     std::string cell_name;
@@ -49,10 +49,11 @@ namespace CS3505
 
   public:
     /**
-     * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the
-     * contents of the afformentioned message string.
+     * Takes in a RAD protocol formatted message string that's intended to be received by the server 
+     * and the client identifier it was sent from,  and passes back a message struct corresponding to 
+     * the contents of the afformentioned message string.
      */
-    static message parse_client_message(std::string string_msg);
+    static message parse_client_message(std::string string_msg, std::string string_ident);
 
     /**
      * Takes in a RAD protocol formatted message string, and passes back a message struct corresponding to the

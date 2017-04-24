@@ -9,6 +9,10 @@
 
 namespace CS3505
 {
+  struct client
+  {
+    std::string last_is_typing;
+  };
   /**
    * Represents a controller object that responds to messages recieved from the client.
    */
@@ -24,7 +28,7 @@ namespace CS3505
      * A map of all currently connected to clients, mapped to the spreadsheet name that they're 
      * currently editing.
      */
-    //std::unordered_map<std::string client_identifier, std::string sheet_name> clients;
+    std::unordered_map<std::string, client> clients;
     /**
      * The method that this controller calls in order to send a message struct out to all the clients.
      */
