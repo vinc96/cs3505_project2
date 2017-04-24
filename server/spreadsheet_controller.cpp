@@ -37,7 +37,14 @@ void spreadsheet_controller::handle_message(message msg)
       //Make the change in the relevent spreadsheet, and get the relevent Change message.
       send = sheets->add_edit(clients.at(msg.identifier).spreadsheet,
 				      msg.cell_name, msg.cell_contents);
-      //Send the Change message we got to the clients.
+      //Look through all of our clients, sending the message to the ones that are connected to this sheet.
+      for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
+    {
+      if (it->second.spreadsheet == clients.at(msg.identifier).spreadsheet)
+	{
+	  send_client(it->first, send);
+	}
+    }
       send_all(send);
       break;
     case message_type::UNDO:
