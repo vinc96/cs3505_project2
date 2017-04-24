@@ -36,16 +36,15 @@ void spreadsheet_controller::handle_message(message msg)
     case message_type::EDIT:
       //Make the change in the relevent spreadsheet, and get the relevent Change message.
       send = sheets->add_edit(clients.at(msg.identifier).spreadsheet,
-				      msg.cell_name, msg.cell_contents);
+			      msg.cell_name, msg.cell_contents);
       //Look through all of our clients, sending the message to the ones that are connected to this sheet.
       for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
-    {
-      if (it->second.spreadsheet == clients.at(msg.identifier).spreadsheet)
 	{
-	  send_client(it->first, send);
+	  if (it->second.spreadsheet == clients.at(msg.identifier).spreadsheet)
+	    {
+	      send_client(it->first, send);
+	    }
 	}
-    }
-      send_all(send);
       break;
     case message_type::UNDO:
       //Make the undo change.
@@ -59,21 +58,41 @@ void spreadsheet_controller::handle_message(message msg)
 	}
       else
 	{
-	  //Send the Change message we got to the clients.
-	  send_all(send);
+	  //Look through all of our clients, sending the message to the ones that are connected to this sheet.
+	  for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
+	    {
+	      if (it->second.spreadsheet == clients.at(msg.identifier).spreadsheet)
+		{
+		  send_client(it->first, send);
+		}
+	    }
 	}
       break;
     case message_type::ISTYPING:
       //Record that this client has an ISTYPING request.
       clients.at(msg.identifier).last_is_typing = msg.cell_name;
       //Relay the ISTYPING message to all clients.
-      send_all(msg);
+      //Look through all of our clients, sending the message to the ones that are connected to this sheet.
+      for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
+	{
+	  if (it->second.spreadsheet == clients.at(msg.identifier).spreadsheet)
+	    {
+	      send_client(it->first, msg);
+	    }
+	}
       break;
     case message_type::DONETYPING:
       //Record that this cleint satisfied its ISTYPING request.
       clients.at(msg.identifier).last_is_typing = "";
       //Relay the DONETYPING message to all clients.
-      send_all(msg);
+      //Look through all of our clients, sending the message to the ones that are connected to this sheet.
+      for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
+	{
+	  if (it->second.spreadsheet == clients.at(msg.identifier).spreadsheet)
+	    {
+	      send_client(it->first, msg);
+	    }
+	}
       break;     
     }
 }
