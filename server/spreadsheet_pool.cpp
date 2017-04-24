@@ -191,19 +191,31 @@ void spreadsheet_pool::new_spreadsheet(string sheet_name)
    }
 }
 
+static int __get_id(void* contents, int columns, char** data, char** columnNames)
+{
+    string* cell_contents = static_cast< string* >(contents);
+    *cell_contents = data[0];
+    // Success:
+    return 0;
+}
+
 message spreadsheet_pool::add_edit(string sheet_name, string cell_name, string cell_contents)
 {
   log->log("Adding edit on sheet: " + sheet_name + " for cell: " + cell_name + " with contents: " + cell_contents, loglevel::ALL);
 
-  const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO edits " \
+  /*const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO edits " \
                                               "(cell_name,cell_contents,spreadsheet_id) VALUES"\
                                               "(%Q,%Q,"\
                                               "(SELECT id "\
                                               "FROM spreadsheets " \
                                               "WHERE name = %Q))").c_str(), cell_name.c_str(), cell_contents.c_str(), sheet_name.c_str());
-  log->log("Query: " + string(spreadsheetTableCreate), loglevel::ALL);
+  //log->log("Query: " + string(spreadsheetTableCreate), loglevel::ALL);*/
   char *error_message = 0;
-  int rc = sqlite3_exec(db, spreadsheetTableCreate, __generic_callback, 0, &error_message);
+  string id = "";
+  const char *spreadsheetTableCreate = sqlite3_mprintf(string("SELECT id "\
+                                              "FROM spreadsheets " \
+                                              "WHERE name = %Q").c_str(), sheet_name.c_str());
+  int rc = sqlite3_exec(db, spreadsheetTableCreate, __get_id, &id, &error_message);
   if( rc != SQLITE_OK ){
       log->log(string("SQL Error:"+string(error_message)), loglevel::ERROR);
       sqlite3_free(error_message);
@@ -211,6 +223,7 @@ message spreadsheet_pool::add_edit(string sheet_name, string cell_name, string c
       e_message.type = message_type::MESSAGE_ERROR;
       return e_message;
    }
+   log->log("Spreadsheet_id: " + id, loglevel::ALL);
    message change_message;
    change_message.type = message_type::CHANGE;
    change_message.cell_name = cell_name;
