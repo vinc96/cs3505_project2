@@ -160,7 +160,7 @@ message spreadsheet_pool::get_cell_on_sheet(string sheet_name, string cell_name)
   string cell_contents = "";
   const char *get_cell = sqlite3_mprintf(string("SELECT cell_contents FROM edits"
                                 "WHERE undone is NULL AND e.cell_name = %Q AND "\
-                                "spreadsheet_id = (SELECT id from spreadsheets WHERE name = %Q)" \
+                                "spreadsheet_id = (SELECT id from spreadsheets WHERE name = %Q) " \
                                 "ORDER BY max(e.id)").c_str(), cell_name.c_str(), sheet_name.c_str());
   char *error_message = 0;
   int rc = sqlite3_exec(db, get_cell, __cell_on_sheet, &cell_contents, &error_message);
@@ -195,8 +195,8 @@ message spreadsheet_pool::add_edit(string sheet_name, string cell_name, string c
 {
   log->log("Adding edit on sheet: " + sheet_name + " for cell: " + cell_name + " with contents: " + cell_contents, loglevel::ALL);
 
-  const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO edits" \
-                                              "(cell_name, cell_contents,spreadsheet_id) VALUES "\
+  const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO edits " \
+                                              "(cell_name,cell_contents,spreadsheet_id) VALUES"\
                                               "(%Q,%Q,"\
                                               "(SELECT id "\
                                               "FROM spreadsheets " \
