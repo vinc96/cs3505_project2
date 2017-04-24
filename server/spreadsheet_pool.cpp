@@ -45,7 +45,7 @@ message spreadsheet_pool::undo_last_change_on_sheet(string sheet_name)
                                         "); "\
                                       "SELECT cell_name, cell_contents FROM table ORDER BY id DESC LIMIT 1 WHERE cell_name = undone is NULL").c_str();
   */
-  const char * get_undo_cell_name = sqlite3_mprintf(string("SELECT cell_name FROM edits "\
+  const char * get_undo_cell_name = sqlite3_mprintf(string("SELECT cell_name FROM edits "
                                            "WHERE undone IS NULL AND spreadsheet_id = "\
                                            "(SELECT id FROM spreadsheets WHERE name = %Q) "\
                                            "ORDER BY id DESC LIMIT 1").c_str(), sheet_name.c_str());
@@ -64,14 +64,14 @@ message spreadsheet_pool::undo_last_change_on_sheet(string sheet_name)
   }
   else
   {
-    const char * set_undone_and_query = sqlite3_mprintf(string("UPDATE edits SET undone = 1 WHERE id = "\
-                                               "(SELECT max(id) FROM edits "\
-                                                 "WHERE undone IS NULL AND spreadsheet_id = "\
-                                                     "(SELECT id FROM spreadsheets WHERE name = %Q)"\
-                                               "); "\
-                                               "SELECT cell_contents FROM edits "\
-                                               "WHERE cell_name = %Q AND "\
-                                               "undone is NULL AND spreadsheet_id = "\
+    const char * set_undone_and_query = sqlite3_mprintf(string("UPDATE edits SET undone = 1 WHERE id = " \
+                                               "(SELECT max(id) FROM edits " \
+                                                 "WHERE undone IS NULL AND spreadsheet_id = " \
+                                                     "(SELECT id FROM spreadsheets WHERE name = %Q)" \
+                                               "); " \
+                                               "SELECT cell_contents FROM edits " \
+                                               "WHERE cell_name = %Q AND " \
+                                               "undone is NULL AND spreadsheet_id = " \
                                                "(SELECT id FROM spreadsheets WHERE name = '"+sheet_name+"')").c_str(), sheet_name.c_str(), new_contents.cell_name.c_str());
     char *error_message = 0;
     int rc = sqlite3_exec(db, set_undone_and_query, __last_value, &new_contents, &error_message);
@@ -124,7 +124,7 @@ message spreadsheet_pool::get_sheet_contents(string sheet_name)
     std::unordered_map<std::string, std::string> cells;
     const char *get_sheet_contents = sqlite3_mprintf(string("SELECT DISTINCT cell_name, cell_contents FROM edits " \
                                          "WHERE undone is NULL AND " \
-                                         "spreadsheet_id = (SELECT id FROM spreadsheets WHERE name = %Q) "\
+                                         "spreadsheet_id = (SELECT id FROM spreadsheets WHERE name = %Q)"\
                                          "ORDER BY id DESC").c_str(), sheet_name.c_str());
     char *error_message = 0;
     int rc = sqlite3_exec(db, get_sheet_contents, __sheet_contents, &cells, &error_message);
@@ -158,7 +158,7 @@ message spreadsheet_pool::get_cell_on_sheet(string sheet_name, string cell_name)
   }
   log->log(string("Getting sheet contents for: "+sheet_name), loglevel::ALL);
   string cell_contents = "";
-  const char *get_cell = sqlite3_mprintf(string("SELECT cell_contents FROM edits "
+  const char *get_cell = sqlite3_mprintf(string("SELECT cell_contents FROM edits"
                                 "WHERE undone is NULL AND e.cell_name = %Q AND "\
                                 "spreadsheet_id = (SELECT id from spreadsheets WHERE name = %Q) " \
                                 "ORDER BY max(e.id)").c_str(), cell_name.c_str(), sheet_name.c_str());
@@ -182,7 +182,7 @@ void spreadsheet_pool::new_spreadsheet(string sheet_name)
 {
   log->log("Creating new spreadsheet named: " + sheet_name, loglevel::INFO);
 
-  const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO spreadsheets (name) VALUES (%Q)").c_str(), sheet_name.c_str());
+  const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO spreadsheets (id, name) VALUES (NULL, %Q)").c_str(), sheet_name.c_str());
   char *error_message = 0;
   int rc = sqlite3_exec(db, spreadsheetTableCreate, __generic_callback, 0, &error_message);
   if( rc != SQLITE_OK ){
@@ -191,30 +191,18 @@ void spreadsheet_pool::new_spreadsheet(string sheet_name)
    }
 }
 
-static int __get_id(void* log_ptr, int columns, char** data, char** columnNames)
-{
-    logger* log = static_cast< logger* >(log_ptr);
-    log->log("Spreadsheet_id value: " + string(data[0]), loglevel::ALL);
-    // Success:
-    return 0;
-}
-
 message spreadsheet_pool::add_edit(string sheet_name, string cell_name, string cell_contents)
 {
   log->log("Adding edit on sheet: " + sheet_name + " for cell: " + cell_name + " with contents: " + cell_contents, loglevel::ALL);
 
-  /*const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO edits " \
-                                              "(cell_name,cell_contents,spreadsheet_id) VALUES"\
-                                              "(%Q,%Q,"\
+  const char *spreadsheetTableCreate = sqlite3_mprintf(string("INSERT INTO edits " \
+                                              "(id,cell_name,cell_contents,spreadsheet_id) VALUES "\
+                                              "(NULL,%Q,%Q,"\
                                               "(SELECT id "\
                                               "FROM spreadsheets " \
                                               "WHERE name = %Q))").c_str(), cell_name.c_str(), cell_contents.c_str(), sheet_name.c_str());
-  */
   char *error_message = 0;
-  const char *spreadsheetTableCreate = sqlite3_mprintf(string("SELECT id "\
-                                              "FROM spreadsheets " \
-                                              "WHERE name = %Q").c_str(), sheet_name.c_str());
-  int rc = sqlite3_exec(db, spreadsheetTableCreate, __get_id, log, &error_message);
+  int rc = sqlite3_exec(db, spreadsheetTableCreate, __generic_callback, 0, &error_message);
   if( rc != SQLITE_OK ){
       log->log(string("SQL Error:"+string(error_message)), loglevel::ERROR);
       sqlite3_free(error_message);
