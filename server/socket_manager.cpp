@@ -96,11 +96,6 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 	{
 	  handle_disconnect(socket_state);
 	}
-      //Start reading again
-      socket_state->socket.async_read_some(buffer(socket_state->receive_buffer, buff_size), 
-					   boost::bind(&socket_manager::read_data, 
-						       this, socket_state, boost::asio::placeholders::error, 
-						       boost::asio::placeholders::bytes_transferred));
       //Lock on the socket, to ensure that we don't have race conditions with the stream.
       socket_state->mtx.lock();
       //Read bytes_read bytes into the socket buffer
@@ -126,8 +121,12 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
 	}
       //Clear the stream, and put whatever we got back into the stream, plus a newline, to be handled later.
       socket_state->stream.clear();
-      socket_state->stream << message ;//<< '\n';
-  
+      socket_state->stream << message ;
+      //Start reading again
+      socket_state->socket.async_read_some(buffer(socket_state->receive_buffer, buff_size), 
+					   boost::bind(&socket_manager::read_data, 
+						       this, socket_state, boost::asio::placeholders::error, 
+						       boost::asio::placeholders::bytes_transferred));
       //Unlock on the socket
       socket_state->mtx.unlock();
     }
