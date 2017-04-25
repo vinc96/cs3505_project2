@@ -63,7 +63,6 @@ message message_parser::parse_client_message(string string_message, string ident
 /**
  * Takes in a message struct that's intended to be sent to a client, 
  * and returns a RAD protocl formatted message string that can be sent out to clients.
- * 
  */
 string message_parser::encode_client_message(message message)
 {

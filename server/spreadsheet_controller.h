@@ -1,3 +1,4 @@
+//Written by Josh Christensen (u0978248)
 #ifndef SPREADSHEET_CONTROLLER_H
 #define SPREADSHEET_CONTROLLER_H
 

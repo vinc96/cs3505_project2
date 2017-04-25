@@ -1,5 +1,4 @@
-//Written by Josh Christensen
-
+//Written by Josh Christensen (u0978248)
 #include "socket_manager.h"
 #include <boost/bind.hpp>
 #include <functional>
@@ -216,10 +215,10 @@ socket_manager::~socket_manager()
   our_io_service.stop();
   //Join our work thread
   work_thread->join();
-  //Clean up our endpoint
-  
   //Delete our socket map.
   delete(sockets);
+  //Delete our acceptor
+  delete(our_acceptor);
 }
 
 /*

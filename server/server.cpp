@@ -1,4 +1,4 @@
-//Written by Josh Christensen
+//Written by Josh Christensen (u0978248)
 
 #include "server.h"
 #include "logger.h"
@@ -145,10 +145,11 @@ bool server::start()
 bool server::stop()
 {
   //Clean things up.
-  //Close our socket manager.
+  //Close our socket manager, controller and spreadsheets.
   delete(networking);
-  
-  return true; //Placeholder
+  delete(controller);
+  delete(spreadsheets);
+  return true;
 }
 
 bool server::is_running()

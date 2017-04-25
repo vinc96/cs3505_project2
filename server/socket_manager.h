@@ -1,4 +1,4 @@
-//Written by Josh Christensen
+//Written by Josh Christensen (u0978248)
 #ifndef SOCKET_MANAGER_H
 #define SOCKET_MANAGER_H
 
@@ -32,16 +32,9 @@ namespace CS3505
 
     ~socket_state()
     {
-      /*
-      //Shutdown our socket.
-      socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
-      //Close the socket.
-      socket.close();
-      */
       //Free our buffer.
       delete(receive_buffer);
       //If our send_buffers queue isn't empty, free the buffers.
-      //TODO: Warning?
       while (send_buffers.size() != 0)
 	{
 	  delete(send_buffers.front().first);

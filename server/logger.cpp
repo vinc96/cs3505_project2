@@ -1,3 +1,4 @@
+//Written by Josh Christensen (u0978248)
 #include "logger.h"
 
 using namespace CS3505;

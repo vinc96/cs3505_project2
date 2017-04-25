@@ -1,4 +1,4 @@
-//Written by Josh Christensen
+//Written by Josh Christensen (u0978248)
 #ifndef SERVER_H
 #define SERVER_H
 
