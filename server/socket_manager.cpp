@@ -138,9 +138,18 @@ void socket_manager::read_data(socket_state *socket_state, const boost::system::
  */
 void socket_manager::data_written(socket_state *socket_state, const boost::system::error_code &error_code, int bytes_written)
 {
-  //Clean up the send buffer
-  delete(socket_state->send_buffers.front());
+  //Clean up the old send buffer
+  delete(socket_state->send_buffers.front().first);
   socket_state->send_buffers.pop();
+  //Check to see if we have any more data to write on this socket. If we do, write again.
+  if (socket_state->send_buffers.size() != 0)
+    {
+      async_write(socket_state->socket,
+		  buffer(socket_state->send_buffers.front().first, socket_state->send_buffers.front().second), 
+		  boost::bind(&socket_manager::data_written, 
+			      this, socket_state, boost::asio::placeholders::error, 
+			      boost::asio::placeholders::bytes_transferred));
+    }
 }
 
 /*
@@ -229,25 +238,26 @@ bool socket_manager::send_message(string message, string client_identifier)
   mtx.lock();
   socket_state *socket_state = sockets->at(client_identifier);
   mtx.unlock();
-  //Lock on the socket
+
   //NOTE: IT'S SAFE TO NOT LOCK THE SOCKET RIGHT NOW, AS SEND_MESSAGE IS ALWAYS SENT SEQUENTIALLY
   //IN RESPONSE TO A received_message.
-  //socket_state->mtx.lock();
+  
   //Create a buffer to hold the string
   char* send_buffer = new char[message.length()];
   //Copy the string over to that buffer
   message.copy(send_buffer, message.length(), 0);
   //Add the buffer to our list of send buffers.
-  socket_state->send_buffers.push(send_buffer);
-  //Start the async send
-  async_write(socket_state->socket,
-	      buffer(send_buffer, message.length()), 
-	      boost::bind(&socket_manager::data_written, 
-			  this, socket_state, boost::asio::placeholders::error, 
-			  boost::asio::placeholders::bytes_transferred));
+  socket_state->send_buffers.push(make_pair(send_buffer, message.length()));
+  //If we don't have any other buffers, start the async send. Otherwise, our write will be handled when we finish those writes.
+  if (socket_state->send_buffers.size() == 1)
+    {
+      async_write(socket_state->socket,
+		  buffer(send_buffer, message.length()), 
+		  boost::bind(&socket_manager::data_written, 
+			      this, socket_state, boost::asio::placeholders::error, 
+			      boost::asio::placeholders::bytes_transferred));
+    }
   return true;
-  //Unlock on the socket
-  //socket_state->mtx.unlock();
 }
 
 /*
@@ -288,7 +298,7 @@ bool socket_manager::kick_client(std::string client_identifier)
       //Shutdown our socket.
       socket_state->socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
       //Close the socket.
-      socket_state->socket.close();
+      //socket_state->socket.close();
       //Mark the socket as closed
       socket_state->is_closed = true;
       return true; 

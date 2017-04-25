@@ -17,8 +17,9 @@ spreadsheet_controller::spreadsheet_controller(spreadsheet_pool *sheets)
  * and performs the actions required to handle it. 
  * For example, if it recieves an EDIT, the controller will add those changes to the model, and then
  * call its send_all listener to inform all the clients of the change.
+ * Returns true if the exchange was valid, false if the client that sent the data should be kicked.
  */
-void spreadsheet_controller::handle_message(message msg)
+bool spreadsheet_controller::handle_message(message msg)
 {
   message send; //In most cases, the message we choose to send to the clients.
   switch(msg.type)
@@ -51,6 +52,11 @@ void spreadsheet_controller::handle_message(message msg)
 	}
       break;
     case message_type::EDIT:
+      //If we sent an edit without sending a CONNECT, kick the client.
+      if (clients.at(msg.identifier).spreadsheet.empty())
+	{
+	  return false;
+	}
       //Make the change in the relevent spreadsheet, and get the relevent Change message.
       send = sheets->add_edit(clients.at(msg.identifier).spreadsheet,
 			      msg.cell_name, msg.cell_contents);
@@ -86,8 +92,21 @@ void spreadsheet_controller::handle_message(message msg)
 	}
       break;
     case message_type::ISTYPING:
-      //Record that this client has an ISTYPING request.
-      clients.at(msg.identifier).last_is_typing = msg.cell_name;
+      //If we sent an ISTYPING without sending a CONNECT, kick the client.
+      if (clients.at(msg.identifier).spreadsheet.empty())
+	{
+	  return false;
+	}
+      //If this client is claiming two cells, kick it.
+      if (clients.at(msg.identifier).last_is_typing != "")
+	{
+	  return false;
+	}
+      else
+	{
+	  //Record that this client has an ISTYPING request.
+	  clients.at(msg.identifier).last_is_typing = msg.cell_name;
+	}
       //Relay the ISTYPING message to all clients.
       //Look through all of our clients, sending the message to the ones that are connected to this sheet.
       for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
@@ -99,8 +118,16 @@ void spreadsheet_controller::handle_message(message msg)
 	}
       break;
     case message_type::DONETYPING:
-      //Record that this cleint satisfied its ISTYPING request.
-      clients.at(msg.identifier).last_is_typing = "";
+      //If this client is trying to free a cell it didn't claim, kick it.
+      if (clients.at(msg.identifier).last_is_typing != msg.cell_name)
+	{
+	  return false;
+	}
+      else
+	{
+	  //Record that this cleint satisfied its ISTYPING request.
+	  clients.at(msg.identifier).last_is_typing = "";
+	}
       //Relay the DONETYPING message to all clients.
       //Look through all of our clients, sending the message to the ones that are connected to this sheet.
       for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
@@ -112,6 +139,7 @@ void spreadsheet_controller::handle_message(message msg)
 	}
       break;     
     }
+  return true;
 }
 
 /**
@@ -131,14 +159,21 @@ void spreadsheet_controller::register_client(std::string client_identifier)
  */
 void spreadsheet_controller::deregister_client(std::string client_identifier)
 {
-  //If this client hasn't sent a DoneTyping message corresponding to its last IsTyping, send the DoneTyping.
+  //If this client hasn't sent a DoneTyping message corresponding to its last IsTyping, send the DoneTyping 
   if (clients.at(client_identifier).last_is_typing != "")
     {
       message msg;
       msg.type = message_type::DONETYPING;
       msg.identifier = client_identifier;
       msg.cell_name = clients.at(client_identifier).last_is_typing;
-      send_all(msg);
+      //Look through all of our clients, sending the message to the ones that are connected to this sheet.
+      for (unordered_map<std::string, client>::iterator it = clients.begin(); it != clients.end(); it++)
+	{
+	  if (it->second.spreadsheet == clients.at(msg.identifier).spreadsheet)
+	    {
+	      send_client(it->first, msg);
+	    }
+	}
     }
   //Remove the client from our list of clients
   clients.erase(client_identifier);

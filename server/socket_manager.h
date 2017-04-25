@@ -14,6 +14,8 @@
 namespace CS3505
 {
 
+  typedef std::pair<char*, int> BUFFER_PAIR; //A pair that contains a buffer as a first parameter, and the size of the buffer in the second.
+
   /*
    * Description:
    * A struct that contains a stringstream, and a boost socket. 
@@ -42,7 +44,7 @@ namespace CS3505
       //TODO: Warning?
       while (send_buffers.size() != 0)
 	{
-	  delete(send_buffers.front());
+	  delete(send_buffers.front().first);
 	  send_buffers.pop();
 	}
     }
@@ -64,13 +66,13 @@ namespace CS3505
      */
     std::stringstream stream;
     /*
-     * The buffer that our socket writes data in.
+     * The buffer that our socket writes data in, paired with the size of the buffer.
      */
     char* receive_buffer;
     /*
-     * The buffer that our socket writes data from.
+     * The buffers that our socket writes data from.
      */
-    std::queue<char*, std::list<char*> > send_buffers;
+    std::queue<BUFFER_PAIR, std::list< BUFFER_PAIR > > send_buffers;
     /*
      * Records whether or not we've closed this socket or not
      */

@@ -1,0 +1,1578 @@
+[INFO]: Networking accepting sockets..
+[INFO]: Server Started
+[INFO]: Connection Recieved: 1
+[ALL]: Message Received From 1: Connect	asdf	
+[ALL]: Getting sheet contents for: asdf
+[ALL]: Message Sent to: 1 Message: Startup	1	B11	We'll see	D6	The mighty Rio Grande	I13	The moster recent edit	E12	b	F13	Something	F16	Server	G19	Figure	G20	Out	E5	Things	E6	Crashed	C15	Face	I10	a	F15	My	I9	b	H7	d	H5	f	D17	Whyu 	A1	We move on paths of never ending light	D18	this 	G18	Need	D19	woudl fail?	H11	asd	H21	t	H22	o	F17	Crashed	H24	with the	H4	g	J16	h	B4	3	G21	Why	H25	map 	H16	Connect\tASDF\t\n	H12	a	E9	a	G13	=A3	F8	A Three Legged Workhorse	H27	store			H17	Random	G6	Something about you	H23	Do	H26	that I	G2	a	J11	d	F10	a	D21	This	H15	\t\t\t\t\t\t\t\t	I3	SomeTest	A5	=A10	H18	crash	A4	ASDF	H19	es	B2	1	H29	In?	I20	b	A3	=G13	C14	Smily	J17	g	J6	d	F4	d	F14	About	A10	=A5	J15	c	H20	Something	B5	=B2+B3+B4	G12	=TestFormula	B3	2	D16	I don't know	F2	Test	J12	shgia	I7	a	H28	Names	J7	What is	J10	thing	J8	t	G17	I n	D20	D19	J9	his	H6	e	G11	=TestFormula	
+
+[INFO]: Client Disconnected: 1
+[INFO]: Connection Recieved: 2
+[ALL]: Message Received From 2: Connect	asdf	
+[ALL]: Getting sheet contents for: asdf
+[ALL]: Message Sent to: 2 Message: Startup	2	B11	We'll see	D6	The mighty Rio Grande	I13	The moster recent edit	E12	b	F13	Something	F16	Server	G19	Figure	G20	Out	E5	Things	E6	Crashed	C15	Face	I10	a	F15	My	I9	b	H7	d	H5	f	D17	Whyu 	A1	We move on paths of never ending light	D18	this 	G18	Need	D19	woudl fail?	H11	asd	H21	t	H22	o	F17	Crashed	H24	with the	H4	g	J16	h	B4	3	G21	Why	H25	map 	H16	Connect\tASDF\t\n	H12	a	E9	a	G13	=A3	F8	A Three Legged Workhorse	H27	store			H17	Random	G6	Something about you	H23	Do	H26	that I	G2	a	J11	d	F10	a	D21	This	H15	\t\t\t\t\t\t\t\t	I3	SomeTest	A5	=A10	H18	crash	A4	ASDF	H19	es	B2	1	H29	In?	I20	b	A3	=G13	C14	Smily	J17	g	J6	d	F4	d	F14	About	A10	=A5	J15	c	H20	Something	B5	=B2+B3+B4	G12	=TestFormula	B3	2	D16	I don't know	F2	Test	J12	shgia	I7	a	H28	Names	J7	What is	J10	thing	J8	t	G17	I n	D20	D19	J9	his	H6	e	G11	=TestFormula	
+
+[ALL]: Message Received From 2: IsTyping	2	D9
+[ALL]: Message Sent to: 2 Message: IsTyping	2	D9	
+
+[ALL]: Message Received From 2: Edit	D9	SomeEdit
+[ALL]: Adding edit on sheet: asdf for cell: D9 with contents: SomeEdit
+[ALL]: Message Sent to: 2 Message: Change	D9	SomeEdit	
+
+[ALL]: Message Received From 2: DoneTyping	2	D9
+[ALL]: Message Sent to: 2 Message: DoneTyping	2	D9	
+
+[ALL]: Message Received From 2: Undo	
+[ALL]: Undoing last change for: asdf
+[INFO]: Didn't execute Undo from 2, as there was nothing to undo
+[ALL]: Message Received From 2: Undo	
+[ALL]: Undoing last change for: asdf
+[INFO]: Didn't execute Undo from 2, as there was nothing to undo
+[ALL]: Message Received From 2: IsTyping	2	C8
+[ALL]: Message Sent to: 2 Message: IsTyping	2	C8	
+
+[INFO]: Connection Recieved: 3
+[ALL]: Message Received From 3: Connect	test	
+[INFO]: Creating new spreadsheet named: test
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 3 Message: Startup	3	
+
+[ALL]: Message Received From 3: IsTyping	3	A1	
+[ALL]: Message Sent to: 3 Message: IsTyping	3	A1	
+
+[ALL]: Message Received From 2: Edit	C8	SomeEdit
+[ALL]: Adding edit on sheet: asdf for cell: C8 with contents: SomeEdit
+[ALL]: Message Sent to: 2 Message: Change	C8	SomeEdit	
+
+[ALL]: Message Received From 2: DoneTyping	2	C8
+[ALL]: Message Sent to: 2 Message: DoneTyping	2	C8	
+
+[ALL]: Message Received From 3: DoneTyping	3	A1	
+[ALL]: Message Sent to: 3 Message: DoneTyping	3	A1	
+
+[ALL]: Message Received From 3: Edit	A1	hello	
+[ALL]: Adding edit on sheet: test for cell: A1 with contents: hello
+[ALL]: Message Sent to: 3 Message: Change	A1	hello	
+
+[ALL]: Message Received From 3: IsTyping	3	A2	
+[ALL]: Message Sent to: 3 Message: IsTyping	3	A2	
+
+[ALL]: Message Received From 3: DoneTyping	3	A2	
+[ALL]: Message Sent to: 3 Message: DoneTyping	3	A2	
+
+[ALL]: Message Received From 3: Edit	A2	testing	
+[ALL]: Adding edit on sheet: test for cell: A2 with contents: testing
+[ALL]: Message Sent to: 3 Message: Change	A2	testing	
+
+[ALL]: Message Received From 3: IsTyping	3	A3	
+[ALL]: Message Sent to: 3 Message: IsTyping	3	A3	
+
+[ALL]: Message Received From 3: DoneTyping	3	A3	
+[ALL]: Message Sent to: 3 Message: DoneTyping	3	A3	
+
+[ALL]: Message Received From 3: Edit	A3	your	
+[ALL]: Adding edit on sheet: test for cell: A3 with contents: your
+[ALL]: Message Sent to: 3 Message: Change	A3	your	
+
+[ALL]: Message Received From 3: IsTyping	3	A4	
+[ALL]: Message Sent to: 3 Message: IsTyping	3	A4	
+
+[ALL]: Message Received From 3: DoneTyping	3	A4	
+[ALL]: Message Sent to: 3 Message: DoneTyping	3	A4	
+
+[ALL]: Message Received From 3: Edit	A4	RAD	
+[ALL]: Adding edit on sheet: test for cell: A4 with contents: RAD
+[ALL]: Message Sent to: 3 Message: Change	A4	RAD	
+
+[ALL]: Message Received From 3: IsTyping	3	A5	
+[ALL]: Message Sent to: 3 Message: IsTyping	3	A5	
+
+[INFO]: Connection Recieved: 4
+[ALL]: Message Received From 3: DoneTyping	3	A5	
+[ALL]: Message Sent to: 3 Message: DoneTyping	3	A5	
+
+[ALL]: Message Received From 3: Edit	A5	server	
+[ALL]: Adding edit on sheet: test for cell: A5 with contents: server
+[ALL]: Message Sent to: 3 Message: Change	A5	server	
+
+[ALL]: Message Received From 2: Undo	
+[ALL]: Undoing last change for: asdf
+[INFO]: Didn't execute Undo from 2, as there was nothing to undo
+[ALL]: Message Received From 3: IsTyping	3	D3	
+[ALL]: Message Sent to: 3 Message: IsTyping	3	D3	
+
+[ALL]: Message Received From 3: DoneTyping	3	D3	
+[ALL]: Message Sent to: 3 Message: DoneTyping	3	D3	
+
+[ALL]: Message Received From 3: Edit	D3	=A1	
+[ALL]: Adding edit on sheet: test for cell: D3 with contents: =A1
+[ALL]: Message Sent to: 3 Message: Change	D3	=A1	
+
+[ALL]: Message Received From 4: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 4 Message: Startup	4	A1	hello	A2	testing	A3	your	A4	RAD	A5	server	D3	=A1	
+
+[ALL]: Message Received From 3: IsTyping	3	D4	
+[ALL]: Message Sent to: 4 Message: IsTyping	3	D4	
+
+[ALL]: Message Sent to: 3 Message: IsTyping	3	D4	
+
+[ALL]: Message Received From 3: DoneTyping	3	D4	
+[ALL]: Message Sent to: 4 Message: DoneTyping	3	D4	
+
+[ALL]: Message Sent to: 3 Message: DoneTyping	3	D4	
+
+[ALL]: Message Received From 3: Edit	D4	=hello	
+[ALL]: Adding edit on sheet: test for cell: D4 with contents: =hello
+[ALL]: Message Sent to: 4 Message: Change	D4	=hello	
+
+[ALL]: Message Sent to: 3 Message: Change	D4	=hello	
+
+[INFO]: Connection Recieved: 5
+[ALL]: Message Received From 5: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 5 Message: Startup	5	A1	hello	A2	testing	A3	your	A4	RAD	A5	server	D3	=A1	D4	=hello	
+
+[ALL]: Message Received From 5: IsTyping	5	F10	
+[ALL]: Message Sent to: 5 Message: IsTyping	5	F10	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	5	F10	
+
+[ALL]: Message Sent to: 3 Message: IsTyping	5	F10	
+
+[ALL]: Message Received From 5: DoneTyping	5	F10	
+[ALL]: Message Sent to: 5 Message: DoneTyping	5	F10	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	5	F10	
+
+[ALL]: Message Sent to: 3 Message: DoneTyping	5	F10	
+
+[ALL]: Message Received From 5: Edit	F10	there was an error in D3 when I connected	
+[ALL]: Adding edit on sheet: test for cell: F10 with contents: there was an error in D3 when I connected
+[ALL]: Message Sent to: 5 Message: Change	F10	there was an error in D3 when I connected	
+
+[ALL]: Message Sent to: 4 Message: Change	F10	there was an error in D3 when I connected	
+
+[ALL]: Message Sent to: 3 Message: Change	F10	there was an error in D3 when I connected	
+
+[ALL]: Message Received From 5: IsTyping	5	G3	
+[ALL]: Message Sent to: 5 Message: IsTyping	5	G3	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	5	G3	
+
+[ALL]: Message Sent to: 3 Message: IsTyping	5	G3	
+
+[ALL]: Message Received From 5: DoneTyping	5	G3	
+[ALL]: Message Sent to: 5 Message: DoneTyping	5	G3	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	5	G3	
+
+[ALL]: Message Sent to: 3 Message: DoneTyping	5	G3	
+
+[ALL]: Message Received From 5: Edit	G3	=32	
+[ALL]: Adding edit on sheet: test for cell: G3 with contents: =32
+[ALL]: Message Sent to: 5 Message: Change	G3	=32	
+
+[ALL]: Message Sent to: 4 Message: Change	G3	=32	
+
+[ALL]: Message Sent to: 3 Message: Change	G3	=32	
+
+[ALL]: Message Received From 5: IsTyping	5	C14	
+[ALL]: Message Sent to: 5 Message: IsTyping	5	C14	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	5	C14	
+
+[ALL]: Message Sent to: 3 Message: IsTyping	5	C14	
+
+[ALL]: Message Received From 5: DoneTyping	5	C14	
+[ALL]: Message Sent to: 5 Message: DoneTyping	5	C14	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	5	C14	
+
+[ALL]: Message Sent to: 3 Message: DoneTyping	5	C14	
+
+[ALL]: Message Received From 5: Edit	C14	=G3 + 2	
+[ALL]: Adding edit on sheet: test for cell: C14 with contents: =G3 + 2
+[ALL]: Message Sent to: 5 Message: Change	C14	=G3 + 2	
+
+[ALL]: Message Sent to: 4 Message: Change	C14	=G3 + 2	
+
+[ALL]: Message Sent to: 3 Message: Change	C14	=G3 + 2	
+
+[INFO]: Client Disconnected: 2
+[INFO]: Connection Recieved: 6
+[ALL]: Message Received From 6: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 6 Message: Startup	6	A1	hello	A2	testing	A5	server	D3	=A1	D4	=hello	F10	there was an error in D3 when I connected	A3	your	G3	=32	A4	RAD	C14	=G3 + 2	
+
+[INFO]: Connection Recieved: 7
+[ALL]: Message Received From 7: Connect	newtest	
+[INFO]: Creating new spreadsheet named: newtest
+[ALL]: Getting sheet contents for: newtest
+[ALL]: Message Sent to: 7 Message: Startup	7	
+
+[ALL]: Message Received From 7: IsTyping	7	A1	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	A1	
+
+[ALL]: Message Received From 7: DoneTyping	7	A1	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	A1	
+
+[ALL]: Message Received From 7: Edit	A1	this is the third client I have connted	
+[ALL]: Adding edit on sheet: newtest for cell: A1 with contents: this is the third client I have connted
+[ALL]: Message Sent to: 7 Message: Change	A1	this is the third client I have connted	
+
+[ALL]: Message Received From 7: IsTyping	7	C3	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	C3	
+
+[ALL]: Message Received From 7: DoneTyping	7	C3	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	C3	
+
+[ALL]: Message Received From 7: Edit	C3	currently	
+[ALL]: Adding edit on sheet: newtest for cell: C3 with contents: currently
+[ALL]: Message Sent to: 7 Message: Change	C3	currently	
+
+[ALL]: Message Received From 7: IsTyping	7	C4	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	C4	
+
+[ALL]: Message Received From 7: DoneTyping	7	C4	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	C4	
+
+[ALL]: Message Received From 7: Edit	C4	watching	
+[ALL]: Adding edit on sheet: newtest for cell: C4 with contents: watching
+[ALL]: Message Sent to: 7 Message: Change	C4	watching	
+
+[ALL]: Message Received From 7: IsTyping	7	C5	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	C5	
+
+[ALL]: Message Received From 7: DoneTyping	7	C5	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	C5	
+
+[ALL]: Message Received From 7: Edit	C5	Bobs	
+[ALL]: Adding edit on sheet: newtest for cell: C5 with contents: Bobs
+[ALL]: Message Sent to: 7 Message: Change	C5	Bobs	
+
+[ALL]: Message Received From 7: IsTyping	7	C6	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	C6	
+
+[ALL]: Message Received From 7: DoneTyping	7	C6	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	C6	
+
+[ALL]: Message Received From 7: Edit	C6	Burgers	
+[ALL]: Adding edit on sheet: newtest for cell: C6 with contents: Burgers
+[ALL]: Message Sent to: 7 Message: Change	C6	Burgers	
+
+[ALL]: Message Received From 7: IsTyping	7	C7	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	C7	
+
+[ALL]: Message Received From 7: DoneTyping	7	C7	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	C7	
+
+[ALL]: Message Received From 7: Edit	C7	While	
+[ALL]: Adding edit on sheet: newtest for cell: C7 with contents: While
+[ALL]: Message Sent to: 7 Message: Change	C7	While	
+
+[ALL]: Message Received From 7: IsTyping	7	C8	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	C8	
+
+[ALL]: Message Received From 7: DoneTyping	7	C8	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	C8	
+
+[ALL]: Message Received From 7: Edit	C8	Testing	
+[ALL]: Adding edit on sheet: newtest for cell: C8 with contents: Testing
+[ALL]: Message Sent to: 7 Message: Change	C8	Testing	
+
+[ALL]: Message Received From 7: IsTyping	7	E4	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	E4	
+
+[ALL]: Message Received From 7: DoneTyping	7	E4	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	E4	
+
+[ALL]: Message Received From 7: Edit	E4	12	
+[ALL]: Adding edit on sheet: newtest for cell: E4 with contents: 12
+[ALL]: Message Sent to: 7 Message: Change	E4	12	
+
+[ALL]: Message Received From 7: IsTyping	7	E5	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	E5	
+
+[ALL]: Message Received From 7: DoneTyping	7	E5	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	E5	
+
+[ALL]: Message Received From 7: Edit	E5	13	
+[ALL]: Adding edit on sheet: newtest for cell: E5 with contents: 13
+[ALL]: Message Sent to: 7 Message: Change	E5	13	
+
+[ALL]: Message Received From 7: IsTyping	7	E6	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	E6	
+
+[ALL]: Message Received From 7: DoneTyping	7	E6	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	E6	
+
+[ALL]: Message Received From 7: Edit	E6	14	
+[ALL]: Adding edit on sheet: newtest for cell: E6 with contents: 14
+[ALL]: Message Sent to: 7 Message: Change	E6	14	
+
+[ALL]: Message Received From 7: IsTyping	7	E7	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	E7	
+
+[ALL]: Message Received From 7: DoneTyping	7	E7	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	E7	
+
+[ALL]: Message Received From 7: Edit	E7	15	
+[ALL]: Adding edit on sheet: newtest for cell: E7 with contents: 15
+[ALL]: Message Sent to: 7 Message: Change	E7	15	
+
+[ALL]: Message Received From 7: IsTyping	7	E8	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	E8	
+
+[ALL]: Message Received From 6: IsTyping	6	B8
+[ALL]: Message Sent to: 6 Message: IsTyping	6	B8	
+
+[ALL]: Message Sent to: 5 Message: IsTyping	6	B8	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	6	B8	
+
+[ALL]: Message Sent to: 3 Message: IsTyping	6	B8	
+
+[ALL]: Message Received From 7: DoneTyping	7	E8	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	E8	
+
+[ALL]: Message Received From 7: Edit	E8	16	
+[ALL]: Adding edit on sheet: newtest for cell: E8 with contents: 16
+[ALL]: Message Sent to: 7 Message: Change	E8	16	
+
+[ALL]: Message Received From 6: Edit	B8	a
+[ALL]: Adding edit on sheet: test for cell: B8 with contents: a
+[ALL]: Message Sent to: 6 Message: Change	B8	a	
+
+[ALL]: Message Sent to: 5 Message: Change	B8	a	
+
+[ALL]: Message Sent to: 4 Message: Change	B8	a	
+
+[ALL]: Message Sent to: 3 Message: Change	B8	a	
+
+[ALL]: Message Received From 6: DoneTyping	6	B8
+[ALL]: Message Sent to: 6 Message: DoneTyping	6	B8	
+
+[ALL]: Message Sent to: 5 Message: DoneTyping	6	B8	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	6	B8	
+
+[ALL]: Message Sent to: 3 Message: DoneTyping	6	B8	
+
+[ALL]: Message Received From 7: IsTyping	7	E9	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	E9	
+
+[ALL]: Message Received From 7: DoneTyping	7	E9	
+[ALL]: Message Sent to: 7 Message: DoneTyping	7	E9	
+
+[ALL]: Message Received From 7: Edit	E9	=E4 + E5 + E6 + E7 + E8	
+[ALL]: Adding edit on sheet: newtest for cell: E9 with contents: =E4 + E5 + E6 + E7 + E8
+[ALL]: Message Sent to: 7 Message: Change	E9	=E4 + E5 + E6 + E7 + E8	
+
+[WARNING]: Client lost connection: 3
+[INFO]: Client Disconnected: 3
+[ALL]: Message Received From 5: IsTyping	7	E5	
+[ALL]: Message Sent to: 7 Message: IsTyping	7	E5	
+
+[INFO]: Client Disconnected: 6
+[INFO]: Connection Recieved: 8
+[ALL]: Message Received From 8: Connect	newtest	
+[ALL]: Getting sheet contents for: newtest
+[ALL]: Message Sent to: 8 Message: Startup	8	A1	this is the third client I have connted	C3	currently	C4	watching	E9	=E4 + E5 + E6 + E7 + E8	E7	15	E4	12	E6	14	C7	While	E5	13	E8	16	C8	Testing	C6	Burgers	C5	Bobs	
+
+[ALL]: Message Sent to: 8 Message: IsTyping	7	E5	
+
+[ALL]: Message Received From 8: IsTyping	8	F7
+[ALL]: Message Sent to: 8 Message: IsTyping	8	F7	
+
+[ALL]: Message Sent to: 7 Message: IsTyping	8	F7	
+
+[ALL]: Message Received From 8: DoneTyping	8	F7
+[ALL]: Message Sent to: 8 Message: DoneTyping	8	F7	
+
+[ALL]: Message Sent to: 7 Message: DoneTyping	8	F7	
+
+[WARNING]: Client lost connection: 5
+[INFO]: Client Disconnected: 5
+[WARNING]: Client lost connection: 7
+[INFO]: Client Disconnected: 7
+[ALL]: Message Sent: DoneTyping	7	E5	
+
+[ALL]: Message Received From 8: IsTyping	8	F10
+[ALL]: Message Sent to: 8 Message: IsTyping	8	F10	
+
+[ALL]: Message Received From 8: DoneTyping	8	F10
+[ALL]: Message Sent to: 8 Message: DoneTyping	8	F10	
+
+[INFO]: Connection Recieved: 9
+[ALL]: Message Received From 9: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 9 Message: Startup	9	B8	a	A1	hello	D3	=A1	C14	=G3 + 2	A4	RAD	G3	=32	A3	your	F10	there was an error in D3 when I connected	A5	server	D4	=hello	A2	testing	
+
+[INFO]: Connection Recieved: 10
+[ALL]: Message Received From 10: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 10 Message: Startup	10	B8	a	A1	hello	D3	=A1	C14	=G3 + 2	A4	RAD	G3	=32	A3	your	F10	there was an error in D3 when I connected	A5	server	D4	=hello	A2	testing	
+
+[WARNING]: Client lost connection: 9
+[INFO]: Client Disconnected: 9
+[INFO]: Connection Recieved: 11
+[ALL]: Message Received From 10: IsTyping	10	D11	
+[ALL]: Message Sent to: 10 Message: IsTyping	10	D11	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	10	D11	
+
+[ALL]: Message Received From 10: DoneTyping	10	D11	
+[ALL]: Message Sent to: 10 Message: DoneTyping	10	D11	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	10	D11	
+
+[ALL]: Message Received From 10: Edit	D11	=32	
+[ALL]: Adding edit on sheet: test for cell: D11 with contents: =32
+[ALL]: Message Sent to: 10 Message: Change	D11	=32	
+
+[ALL]: Message Sent to: 4 Message: Change	D11	=32	
+
+[ALL]: Message Received From 11: lkjdfgdfg
+[WARNING]: Cannot parse message: lkjdfgdfg
+[WARNING]:  Kicking client: 11
+[WARNING]: Socket Recieve Error: Operation canceled
+[INFO]: Connection Recieved: 12
+[ALL]: Message Received From 12: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 12 Message: Startup	12	D11	=32	B8	a	A1	hello	D3	=A1	C14	=G3 + 2	A4	RAD	G3	=32	A3	your	F10	there was an error in D3 when I connected	A2	testing	D4	=hello	A5	server	
+
+[INFO]: Connection Recieved: 13
+[ALL]: Message Received From 13: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 13 Message: Startup	13	D11	=32	B8	a	A1	hello	D3	=A1	C14	=G3 + 2	A4	RAD	G3	=32	A3	your	F10	there was an error in D3 when I connected	A2	testing	D4	=hello	A5	server	
+
+[ALL]: Message Received From 13: IsTyping	13	G16	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	G16	
+
+[ALL]: Message Sent to: 10 Message: IsTyping	13	G16	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	G16	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	G16	
+
+[ALL]: Message Received From 13: DoneTyping	13	G16	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	G16	
+
+[ALL]: Message Sent to: 10 Message: DoneTyping	13	G16	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	G16	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	G16	
+
+[ALL]: Message Received From 13: Edit	G16	sdfsdf	
+[ALL]: Adding edit on sheet: test for cell: G16 with contents: sdfsdf
+[ALL]: Message Sent to: 13 Message: Change	G16	sdfsdf	
+
+[ALL]: Message Sent to: 10 Message: Change	G16	sdfsdf	
+
+[ALL]: Message Sent to: 12 Message: Change	G16	sdfsdf	
+
+[ALL]: Message Sent to: 4 Message: Change	G16	sdfsdf	
+
+[WARNING]: Client lost connection: 10
+[INFO]: Client Disconnected: 10
+[ALL]: Message Received From 13: IsTyping	13	D15	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	D15	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	D15	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	D15	
+
+[ALL]: Message Received From 13: DoneTyping	13	D15	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	D15	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	D15	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	D15	
+
+[ALL]: Message Received From 13: Edit	D15	sdf	
+[ALL]: Adding edit on sheet: test for cell: D15 with contents: sdf
+[ALL]: Message Sent to: 13 Message: Change	D15	sdf	
+
+[ALL]: Message Sent to: 12 Message: Change	D15	sdf	
+
+[ALL]: Message Sent to: 4 Message: Change	D15	sdf	
+
+[ALL]: Message Received From 13: IsTyping	13	A13	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A13	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A13	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A13	
+
+[ALL]: Message Received From 13: DoneTyping	13	A13	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A13	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A13	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A13	
+
+[ALL]: Message Received From 13: Edit	A13	32	
+[ALL]: Adding edit on sheet: test for cell: A13 with contents: 32
+[ALL]: Message Sent to: 13 Message: Change	A13	32	
+
+[ALL]: Message Sent to: 12 Message: Change	A13	32	
+
+[ALL]: Message Sent to: 4 Message: Change	A13	32	
+
+[ALL]: Message Received From 13: IsTyping	13	A14	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A14	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A14	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A14	
+
+[ALL]: Message Received From 13: DoneTyping	13	A14	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A14	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A14	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A14	
+
+[ALL]: Message Received From 13: Edit	A14	32	
+[ALL]: Adding edit on sheet: test for cell: A14 with contents: 32
+[ALL]: Message Sent to: 13 Message: Change	A14	32	
+
+[ALL]: Message Sent to: 12 Message: Change	A14	32	
+
+[ALL]: Message Sent to: 4 Message: Change	A14	32	
+
+[ALL]: Message Received From 13: IsTyping	13	A15	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A15	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A15	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A15	
+
+[ALL]: Message Received From 13: DoneTyping	13	A15	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A15	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A15	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A15	
+
+[ALL]: Message Received From 13: Edit	A15	32	
+[ALL]: Adding edit on sheet: test for cell: A15 with contents: 32
+[ALL]: Message Sent to: 13 Message: Change	A15	32	
+
+[ALL]: Message Sent to: 12 Message: Change	A15	32	
+
+[ALL]: Message Sent to: 4 Message: Change	A15	32	
+
+[ALL]: Message Received From 13: IsTyping	13	A16	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A16	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A16	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A16	
+
+[ALL]: Message Received From 13: DoneTyping	13	A16	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A16	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A16	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A16	
+
+[ALL]: Message Received From 13: Edit	A16	32	
+[ALL]: Adding edit on sheet: test for cell: A16 with contents: 32
+[ALL]: Message Sent to: 13 Message: Change	A16	32	
+
+[ALL]: Message Sent to: 12 Message: Change	A16	32	
+
+[ALL]: Message Sent to: 4 Message: Change	A16	32	
+
+[ALL]: Message Received From 13: IsTyping	13	A17	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A17	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A17	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A17	
+
+[ALL]: Message Received From 13: DoneTyping	13	A17	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A17	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A17	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A17	
+
+[ALL]: Message Received From 13: Edit	A17	32	
+[ALL]: Adding edit on sheet: test for cell: A17 with contents: 32
+[ALL]: Message Sent to: 13 Message: Change	A17	32	
+
+[ALL]: Message Sent to: 12 Message: Change	A17	32	
+
+[ALL]: Message Sent to: 4 Message: Change	A17	32	
+
+[ALL]: Message Received From 13: IsTyping	13	A18	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A18	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A18	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A18	
+
+[ALL]: Message Received From 13: DoneTyping	13	A18	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A18	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A18	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A18	
+
+[ALL]: Message Received From 13: Edit	A18	323	
+[ALL]: Adding edit on sheet: test for cell: A18 with contents: 323
+[ALL]: Message Sent to: 13 Message: Change	A18	323	
+
+[ALL]: Message Sent to: 12 Message: Change	A18	323	
+
+[ALL]: Message Sent to: 4 Message: Change	A18	323	
+
+[ALL]: Message Received From 13: IsTyping	13	A19	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A19	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A19	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A19	
+
+[ALL]: Message Received From 13: DoneTyping	13	A19	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A19	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A19	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A19	
+
+[ALL]: Message Received From 13: Edit	A19	3	
+[ALL]: Adding edit on sheet: test for cell: A19 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A19	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A19	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A19	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A20	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A20	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A20	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A20	
+
+[ALL]: Message Received From 13: DoneTyping	13	A20	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A20	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A20	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A20	
+
+[ALL]: Message Received From 13: Edit	A20	3	
+[ALL]: Adding edit on sheet: test for cell: A20 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A20	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A20	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A20	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A21	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A21	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A21	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A21	
+
+[ALL]: Message Received From 13: DoneTyping	13	A21	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A21	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A21	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A21	
+
+[ALL]: Message Received From 13: Edit	A21	3	
+[ALL]: Adding edit on sheet: test for cell: A21 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A21	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A21	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A21	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A22	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A22	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A22	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A22	
+
+[ALL]: Message Received From 13: DoneTyping	13	A22	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A22	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A22	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A22	
+
+[ALL]: Message Received From 13: Edit	A22	3	
+[ALL]: Adding edit on sheet: test for cell: A22 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A22	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A22	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A22	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A23	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A23	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A23	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A23	
+
+[ALL]: Message Received From 13: DoneTyping	13	A23	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A23	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A23	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A23	
+
+[ALL]: Message Received From 13: Edit	A23	3	
+[ALL]: Adding edit on sheet: test for cell: A23 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A23	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A23	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A23	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A24	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A24	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A24	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A24	
+
+[ALL]: Message Received From 13: DoneTyping	13	A24	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A24	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A24	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A24	
+
+[ALL]: Message Received From 13: Edit	A24	3	
+[ALL]: Adding edit on sheet: test for cell: A24 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A24	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A24	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A24	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A25	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A25	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A25	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A25	
+
+[ALL]: Message Received From 13: DoneTyping	13	A25	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A25	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A25	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A25	
+
+[ALL]: Message Received From 13: Edit	A25	3	
+[ALL]: Adding edit on sheet: test for cell: A25 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A25	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A25	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A25	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A26	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A26	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A26	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A26	
+
+[ALL]: Message Received From 13: DoneTyping	13	A26	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A26	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A26	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A26	
+
+[ALL]: Message Received From 13: Edit	A26	3	
+[ALL]: Adding edit on sheet: test for cell: A26 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A26	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A26	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A26	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A27	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A27	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A27	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A27	
+
+[ALL]: Message Received From 13: DoneTyping	13	A27	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A27	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A27	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A27	
+
+[ALL]: Message Received From 13: Edit	A27	3	
+[ALL]: Adding edit on sheet: test for cell: A27 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A27	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A27	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A27	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A28	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A28	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A28	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A28	
+
+[ALL]: Message Received From 13: DoneTyping	13	A28	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A28	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A28	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A28	
+
+[ALL]: Message Received From 13: Edit	A28	3	
+[ALL]: Adding edit on sheet: test for cell: A28 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A28	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A28	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A28	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A29	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A29	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A29	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A29	
+
+[ALL]: Message Received From 13: DoneTyping	13	A29	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A29	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A29	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A29	
+
+[ALL]: Message Received From 13: Edit	A29	3	
+[ALL]: Adding edit on sheet: test for cell: A29 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A29	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A29	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A29	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A30	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A30	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A30	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A30	
+
+[ALL]: Message Received From 13: DoneTyping	13	A30	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A30	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A30	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A30	
+
+[ALL]: Message Received From 13: Edit	A30	3	
+[ALL]: Adding edit on sheet: test for cell: A30 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A30	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A30	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A30	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A31	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A31	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A31	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A31	
+
+[ALL]: Message Received From 13: DoneTyping	13	A31	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A31	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A31	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A31	
+
+[ALL]: Message Received From 13: Edit	A31	3	
+[ALL]: Adding edit on sheet: test for cell: A31 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A31	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A31	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A31	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A32	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A32	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A32	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A32	
+
+[ALL]: Message Received From 13: DoneTyping	13	A32	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A32	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A32	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A32	
+
+[ALL]: Message Received From 13: Edit	A32	3	
+[ALL]: Adding edit on sheet: test for cell: A32 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A32	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A32	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A32	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A33	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A33	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A33	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A33	
+
+[ALL]: Message Received From 13: DoneTyping	13	A33	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	A33	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	A33	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	A33	
+
+[ALL]: Message Received From 13: Edit	A33	3	
+[ALL]: Adding edit on sheet: test for cell: A33 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	A33	3	
+
+[ALL]: Message Sent to: 12 Message: Change	A33	3	
+
+[ALL]: Message Sent to: 4 Message: Change	A33	3	
+
+[ALL]: Message Received From 13: IsTyping	13	A34	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	A34	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	A34	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	A34	
+
+[ALL]: Message Received From 13: DoneTyping	13	K6	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K6	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K6	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K6	
+
+[ALL]: Message Received From 13: Edit	K6	3	
+[ALL]: Adding edit on sheet: test for cell: K6 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K6	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K6	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K6	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K7	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K7	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K7	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K7	
+
+[ALL]: Message Received From 13: DoneTyping	13	K7	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K7	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K7	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K7	
+
+[ALL]: Message Received From 13: Edit	K7	3	
+[ALL]: Adding edit on sheet: test for cell: K7 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K7	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K7	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K7	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K8	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K8	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K8	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K8	
+
+[ALL]: Message Received From 13: DoneTyping	13	K8	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K8	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K8	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K8	
+
+[ALL]: Message Received From 13: Edit	K8	3	
+[ALL]: Adding edit on sheet: test for cell: K8 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K8	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K8	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K8	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K9	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K9	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K9	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K9	
+
+[ALL]: Message Received From 13: DoneTyping	13	K9	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K9	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K9	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K9	
+
+[ALL]: Message Received From 13: Edit	K9	3	
+[ALL]: Adding edit on sheet: test for cell: K9 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K9	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K9	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K9	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K10	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K10	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K10	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K10	
+
+[ALL]: Message Received From 13: DoneTyping	13	K10	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K10	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K10	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K10	
+
+[ALL]: Message Received From 13: Edit	K10	3	
+[ALL]: Adding edit on sheet: test for cell: K10 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K10	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K10	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K10	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K11	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K11	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K11	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K11	
+
+[ALL]: Message Received From 13: DoneTyping	13	K11	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K11	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K11	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K11	
+
+[ALL]: Message Received From 13: Edit	K11	3	
+[ALL]: Adding edit on sheet: test for cell: K11 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K11	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K11	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K11	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K12	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K12	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K12	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K12	
+
+[ALL]: Message Received From 13: DoneTyping	13	K12	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K12	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K12	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K12	
+
+[ALL]: Message Received From 13: Edit	K12	3	
+[ALL]: Adding edit on sheet: test for cell: K12 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K12	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K12	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K12	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K13	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K13	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K13	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K13	
+
+[ALL]: Message Received From 13: DoneTyping	13	K13	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K13	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K13	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K13	
+
+[ALL]: Message Received From 13: Edit	K13	3	
+[ALL]: Adding edit on sheet: test for cell: K13 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K13	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K13	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K13	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K14	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K14	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K14	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K14	
+
+[ALL]: Message Received From 13: DoneTyping	13	K14	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K14	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K14	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K14	
+
+[ALL]: Message Received From 13: Edit	K14	3	
+[ALL]: Adding edit on sheet: test for cell: K14 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K14	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K14	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K14	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K15	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K15	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K15	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K15	
+
+[ALL]: Message Received From 13: DoneTyping	13	K15	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K15	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K15	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K15	
+
+[ALL]: Message Received From 13: Edit	K15	3	
+[ALL]: Adding edit on sheet: test for cell: K15 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K15	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K15	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K15	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K16	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K16	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K16	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K16	
+
+[ALL]: Message Received From 13: DoneTyping	13	K16	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K16	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K16	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K16	
+
+[ALL]: Message Received From 13: Edit	K16	3	
+[ALL]: Adding edit on sheet: test for cell: K16 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K16	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K16	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K16	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K17	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K17	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K17	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K17	
+
+[ALL]: Message Received From 13: DoneTyping	13	K17	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K17	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K17	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K17	
+
+[ALL]: Message Received From 13: Edit	K17	33	
+[ALL]: Adding edit on sheet: test for cell: K17 with contents: 33
+[ALL]: Message Sent to: 13 Message: Change	K17	33	
+
+[ALL]: Message Sent to: 12 Message: Change	K17	33	
+
+[ALL]: Message Sent to: 4 Message: Change	K17	33	
+
+[ALL]: Message Received From 13: IsTyping	13	K18	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K18	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K18	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K18	
+
+[ALL]: Message Received From 13: DoneTyping	13	K18	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K18	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K18	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K18	
+
+[ALL]: Message Received From 13: Edit	K18	3	
+[ALL]: Adding edit on sheet: test for cell: K18 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K18	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K18	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K18	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K19	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K19	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K19	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K19	
+
+[ALL]: Message Received From 13: DoneTyping	13	K19	
+[ALL]: Message Sent to: 13 Message: DoneTyping	13	K19	
+
+[ALL]: Message Sent to: 12 Message: DoneTyping	13	K19	
+
+[ALL]: Message Sent to: 4 Message: DoneTyping	13	K19	
+
+[ALL]: Message Received From 13: Edit	K19	3	
+[ALL]: Adding edit on sheet: test for cell: K19 with contents: 3
+[ALL]: Message Sent to: 13 Message: Change	K19	3	
+
+[ALL]: Message Sent to: 12 Message: Change	K19	3	
+
+[ALL]: Message Sent to: 4 Message: Change	K19	3	
+
+[ALL]: Message Received From 13: IsTyping	13	K20	
+[ALL]: Message Sent to: 13 Message: IsTyping	13	K20	
+
+[ALL]: Message Sent to: 12 Message: IsTyping	13	K20	
+
+[ALL]: Message Sent to: 4 Message: IsTyping	13	K20	
+
+[INFO]: Connection Recieved: 14
+[ALL]: Message Received From 14: Connect	test2	
+[INFO]: Creating new spreadsheet named: test2
+[ALL]: Getting sheet contents for: test2
+[ALL]: Message Sent to: 14 Message: Startup	14	
+
+[ALL]: Message Received From 14: IsTyping	14	A1	
+[ALL]: Message Sent to: 14 Message: IsTyping	14	A1	
+
+[INFO]: Client Disconnected: 8
+[INFO]: Connection Recieved: 15
+[ALL]: Message Received From 15: Connect	test2	
+[ALL]: Getting sheet contents for: test2
+[ALL]: Message Sent to: 15 Message: Startup	15	
+
+[ALL]: Message Sent to: 15 Message: IsTyping	14	A1	
+
+[ALL]: Message Received From 14: DoneTyping	14	A1	
+[ALL]: Message Sent to: 14 Message: DoneTyping	14	A1	
+
+[ALL]: Message Sent to: 15 Message: DoneTyping	14	A1	
+
+[ALL]: Message Received From 14: Edit	A1	new file started	
+[ALL]: Adding edit on sheet: test2 for cell: A1 with contents: new file started
+[ALL]: Message Sent to: 14 Message: Change	A1	new file started	
+
+[ALL]: Message Sent to: 15 Message: Change	A1	new file started	
+
+[WARNING]: Client lost connection: 14
+[INFO]: Client Disconnected: 14
+[INFO]: Connection Recieved: 16
+[ALL]: Message Received From 16: Connect	test1	
+[INFO]: Creating new spreadsheet named: test1
+[ALL]: Getting sheet contents for: test1
+[ALL]: Message Sent to: 16 Message: Startup	16	
+
+[ALL]: Message Received From 16: IsTyping	16	B10	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B10	
+
+[ALL]: Message Received From 16: DoneTyping	16	B10	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B10	
+
+[ALL]: Message Received From 16: Edit	B10	another file opened	
+[ALL]: Adding edit on sheet: test1 for cell: B10 with contents: another file opened
+[ALL]: Message Sent to: 16 Message: Change	B10	another file opened	
+
+[ALL]: Message Received From 16: IsTyping	16	B11	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B11	
+
+[ALL]: Message Received From 16: DoneTyping	16	B11	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B11	
+
+[ALL]: Message Received From 16: Edit	B11	2	
+[ALL]: Adding edit on sheet: test1 for cell: B11 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B11	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B12	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B12	
+
+[ALL]: Message Received From 16: DoneTyping	16	B12	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B12	
+
+[ALL]: Message Received From 16: Edit	B12	2	
+[ALL]: Adding edit on sheet: test1 for cell: B12 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B12	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B13	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B13	
+
+[ALL]: Message Received From 16: DoneTyping	16	B13	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B13	
+
+[ALL]: Message Received From 16: Edit	B13	2	
+[ALL]: Adding edit on sheet: test1 for cell: B13 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B13	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B14	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B14	
+
+[ALL]: Message Received From 16: DoneTyping	16	B14	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B14	
+
+[ALL]: Message Received From 16: Edit	B14	2	
+[ALL]: Adding edit on sheet: test1 for cell: B14 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B14	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B15	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B15	
+
+[ALL]: Message Received From 16: DoneTyping	16	B15	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B15	
+
+[ALL]: Message Received From 16: Edit	B15	2	
+[ALL]: Adding edit on sheet: test1 for cell: B15 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B15	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B16	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B16	
+
+[ALL]: Message Received From 16: DoneTyping	16	B16	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B16	
+
+[ALL]: Message Received From 16: Edit	B16	2	
+[ALL]: Adding edit on sheet: test1 for cell: B16 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B16	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B17	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B17	
+
+[ALL]: Message Received From 16: DoneTyping	16	B17	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B17	
+
+[ALL]: Message Received From 16: Edit	B17	2	
+[ALL]: Adding edit on sheet: test1 for cell: B17 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B17	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B18	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B18	
+
+[ALL]: Message Received From 16: DoneTyping	16	B18	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B18	
+
+[ALL]: Message Received From 16: Edit	B18	2	
+[ALL]: Adding edit on sheet: test1 for cell: B18 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B18	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B19	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B19	
+
+[ALL]: Message Received From 16: DoneTyping	16	B19	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B19	
+
+[ALL]: Message Received From 16: Edit	B19	2	
+[ALL]: Adding edit on sheet: test1 for cell: B19 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B19	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B20	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B20	
+
+[ALL]: Message Received From 16: DoneTyping	16	B20	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B20	
+
+[ALL]: Message Received From 16: Edit	B20	2	
+[ALL]: Adding edit on sheet: test1 for cell: B20 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B20	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B21	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B21	
+
+[ALL]: Message Received From 16: DoneTyping	16	B21	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B21	
+
+[ALL]: Message Received From 16: Edit	B21	2	
+[ALL]: Adding edit on sheet: test1 for cell: B21 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B21	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B22	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B22	
+
+[ALL]: Message Received From 16: DoneTyping	16	B22	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B22	
+
+[ALL]: Message Received From 16: Edit	B22	2	
+[ALL]: Adding edit on sheet: test1 for cell: B22 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B22	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B23	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B23	
+
+[ALL]: Message Received From 16: DoneTyping	16	B23	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B23	
+
+[ALL]: Message Received From 16: Edit	B23	2	
+[ALL]: Adding edit on sheet: test1 for cell: B23 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B23	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B24	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B24	
+
+[ALL]: Message Received From 16: DoneTyping	16	B24	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B24	
+
+[ALL]: Message Received From 16: Edit	B24	2	
+[ALL]: Adding edit on sheet: test1 for cell: B24 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B24	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B25	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B25	
+
+[ALL]: Message Received From 16: DoneTyping	16	B25	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B25	
+
+[ALL]: Message Received From 16: Edit	B25	2	
+[ALL]: Adding edit on sheet: test1 for cell: B25 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B25	2	
+
+[ALL]: Message Received From 16: IsTyping	16	B26	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	B26	
+
+[ALL]: Message Received From 16: DoneTyping	16	B26	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	B26	
+
+[ALL]: Message Received From 16: Edit	B26	2	
+[ALL]: Adding edit on sheet: test1 for cell: B26 with contents: 2
+[ALL]: Message Sent to: 16 Message: Change	B26	2	
+
+[WARNING]: Client lost connection: 13
+[INFO]: Client Disconnected: 13
+[ALL]: Message Sent: DoneTyping	13	K20	
+
+[ALL]: Message Received From 16: IsTyping	16	E7	
+[ALL]: Message Sent to: 16 Message: IsTyping	16	E7	
+
+[ALL]: Message Received From 16: DoneTyping	16	E7	
+[ALL]: Message Sent to: 16 Message: DoneTyping	16	E7	
+
+[ALL]: Message Received From 16: Edit	E7	testing to make sure clients are their own thread	
+[ALL]: Adding edit on sheet: test1 for cell: E7 with contents: testing to make sure clients are their own thread
+[ALL]: Message Sent to: 16 Message: Change	E7	testing to make sure clients are their own thread	
+
+[INFO]: Connection Recieved: 17
+[ALL]: Message Received From 17: Connect	newtest	
+[ALL]: Getting sheet contents for: newtest
+[ALL]: Message Sent to: 17 Message: Startup	17	A1	this is the third client I have connted	C3	currently	C4	watching	E9	=E4 + E5 + E6 + E7 + E8	E7	15	E4	12	E6	14	C7	While	E5	13	E8	16	C8	Testing	C6	Burgers	C5	Bobs	
+
+[INFO]: Connection Recieved: 18
+[ALL]: Message Received From 18: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 18 Message: Startup	18	A1	hello	A2	testing	A3	your	A27	3	A26	3	A31	3	A32	3	K10	3	K6	3	D3	=A1	K9	3	A33	3	K8	3	K16	3	K11	3	K13	3	K7	3	G3	=32	K17	33	K14	3	K15	3	A30	3	K12	3	A19	3	K18	3	A25	3	A20	3	B8	a	A24	3	D15	sdf	A22	3	A21	3	A18	323	A17	32	A16	32	F10	there was an error in D3 when I connected	A29	3	A23	3	A15	32	A14	32	A13	32	A28	3	A5	server	K19	3	G16	sdfsdf	D11	=32	C14	=G3 + 2	D4	=hello	A4	RAD	
+
+[INFO]: Client Disconnected: 15
+[INFO]: Connection Recieved: 19
+[ALL]: Message Received From 19: Connect	newtest	
+[ALL]: Getting sheet contents for: newtest
+[ALL]: Message Sent to: 19 Message: Startup	19	A1	this is the third client I have connted	C3	currently	C4	watching	E9	=E4 + E5 + E6 + E7 + E8	E7	15	E4	12	E6	14	C7	While	E5	13	E8	16	C8	Testing	C6	Burgers	C5	Bobs	
+
+[INFO]: Client Disconnected: 19
+[INFO]: Connection Recieved: 20
+[ALL]: Message Received From 20: Connect	newtest	
+[ALL]: Getting sheet contents for: newtest
+[ALL]: Message Sent to: 20 Message: Startup	20	A1	this is the third client I have connted	C3	currently	C4	watching	E9	=E4 + E5 + E6 + E7 + E8	E7	15	E4	12	E6	14	C7	While	E5	13	E8	16	C8	Testing	C6	Burgers	C5	Bobs	
+
+[INFO]: Client Disconnected: 20
+[INFO]: Connection Recieved: 21
+[ALL]: Message Received From 21: Connect	screenshot	
+[INFO]: Creating new spreadsheet named: screenshot
+[ALL]: Getting sheet contents for: screenshot
+[ALL]: Message Sent to: 21 Message: Startup	21	
+
+[WARNING]: Client lost connection: 21
+[INFO]: Client Disconnected: 21
+[INFO]: Connection Recieved: 22
+[ALL]: Message Received From 22: Connect	asdf	
+[ALL]: Getting sheet contents for: asdf
+[ALL]: Message Sent to: 22 Message: Startup	22	B11	We'll see	D6	The mighty Rio Grande	I13	The moster recent edit	E12	b	F13	Something	F16	Server	G19	Figure	G20	Out	E5	Things	E6	Crashed	C15	Face	I10	a	F15	My	I9	b	H7	d	H5	f	D17	Whyu 	A1	We move on paths of never ending light	D18	this 	H4	g	J16	h	H22	o	F17	Crashed	H24	with the	B4	3	H16	Connect\tASDF\t\n	H12	a	E9	a	G13	=A3	H11	asd	H21	t	G21	Why	H25	map 	F8	A Three Legged Workhorse	H27	store	I3	SomeTest	A5	=A10	H18	crash	A4	ASDF	H19	es	I20	b	A3	=G13	H17	Random	F10	a	J11	d	H15	\t\t\t\t\t\t\t\t	D21	This	G2	a	H29	In?	B2	1	G6	Something about you	H23	Do	H26	that I	C14	Smily	J17	g	J6	d	F4	d	F14	About	A10	=A5	J15	c	H20	Something	B5	=B2+B3+B4	G12	=TestFormula	B3	2	D16	I don't know	F2	Test	J12	shgia	I7	a	H28	Names	J7	What is	J10	thing	J8	t	G17	I n	D20	D19	J9	his	H6	e	G11	=TestFormula	G18	Need	D19	woudl fail?	
+
+[INFO]: Client Disconnected: 18
+[WARNING]: Client lost connection: 16
+[INFO]: Client Disconnected: 16
+[WARNING]: Client lost connection: 17
+[INFO]: Client Disconnected: 17
+[ALL]: Message Received From 22: IsTyping	22	C9
+[ALL]: Message Sent to: 22 Message: IsTyping	22	C9	
+
+[ALL]: Message Received From 22: Edit	C9	Try to Undo
+[ALL]: Adding edit on sheet: asdf for cell: C9 with contents: Try to Undo
+[ALL]: Message Sent to: 22 Message: Change	C9	Try to Undo	
+
+[ALL]: Message Received From 22: DoneTyping	22	C9
+[ALL]: Message Sent to: 22 Message: DoneTyping	22	C9	
+
+[ALL]: Message Received From 22: Undo	
+[ALL]: Undoing last change for: asdf
+[INFO]: Didn't execute Undo from 22, as there was nothing to undo
+[INFO]: Connection Recieved: 23
+[ALL]: Message Received From 23: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 23 Message: Startup	23	A1	hello	A2	testing	A3	your	A27	3	A26	3	A31	3	A32	3	K10	3	K6	3	D3	=A1	K9	3	A33	3	K8	3	K16	3	K11	3	K13	3	K7	3	G3	=32	K17	33	K14	3	K15	3	A30	3	K12	3	A19	3	K18	3	A25	3	A20	3	B8	a	A24	3	D15	sdf	A22	3	A21	3	A18	323	A17	32	A16	32	F10	there was an error in D3 when I connected	A29	3	A23	3	A15	32	A14	32	A13	32	A28	3	A5	server	K19	3	G16	sdfsdf	D11	=32	C14	=G3 + 2	D4	=hello	A4	RAD	
+
+[INFO]: Connection Recieved: 24
+[ALL]: Message Received From 24: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 24 Message: Startup	24	A1	hello	A2	testing	A3	your	A27	3	A26	3	A31	3	A32	3	K10	3	K6	3	D3	=A1	K9	3	A33	3	K8	3	K16	3	K11	3	K13	3	K7	3	G3	=32	K17	33	K14	3	K15	3	A30	3	K12	3	A19	3	K18	3	A25	3	A20	3	B8	a	A24	3	D15	sdf	A22	3	A21	3	A18	323	A17	32	A16	32	F10	there was an error in D3 when I connected	A29	3	A23	3	A15	32	A14	32	A13	32	A28	3	A5	server	K19	3	G16	sdfsdf	D11	=32	C14	=G3 + 2	D4	=hello	A4	RAD	
+
+[INFO]: Client Disconnected: 22
+[INFO]: Connection Recieved: 25
+[ALL]: Message Received From 25: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 25 Message: Startup	25	A1	hello	A2	testing	A3	your	A27	3	A26	3	A31	3	A32	3	K10	3	K6	3	D3	=A1	K9	3	A33	3	K8	3	K16	3	K11	3	K13	3	K7	3	G3	=32	K17	33	K14	3	K15	3	A30	3	K12	3	A19	3	K18	3	A25	3	A20	3	B8	a	A24	3	D15	sdf	A22	3	A21	3	A18	323	A17	32	A16	32	F10	there was an error in D3 when I connected	A29	3	A23	3	A15	32	A14	32	A13	32	A28	3	A5	server	K19	3	G16	sdfsdf	D11	=32	C14	=G3 + 2	D4	=hello	A4	RAD	
+
+[INFO]: Connection Recieved: 26
+[ALL]: Message Received From 26: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 26 Message: Startup	26	A1	hello	A2	testing	A3	your	A27	3	A26	3	A31	3	A32	3	K10	3	K6	3	D3	=A1	K9	3	A33	3	K8	3	K16	3	K11	3	K13	3	K7	3	G3	=32	K17	33	K14	3	K15	3	A30	3	K12	3	A19	3	K18	3	A25	3	A20	3	B8	a	A24	3	D15	sdf	A22	3	A21	3	A18	323	A17	32	A16	32	F10	there was an error in D3 when I connected	A29	3	A23	3	A15	32	A14	32	A13	32	A28	3	A5	server	K19	3	G16	sdfsdf	D11	=32	C14	=G3 + 2	D4	=hello	A4	RAD	
+
+[INFO]: Connection Recieved: 27
+[ALL]: Message Received From 27: Connect	test	
+[ALL]: Getting sheet contents for: test
+[ALL]: Message Sent to: 27 Message: Startup	27	A1	hello	A2	testing	A3	your	A27	3	A26	3	A31	3	A32	3	K10	3	K6	3	D3	=A1	K9	3	A33	3	K8	3	K16	3	K11	3	K13	3	K7	3	G3	=32	K17	33	K14	3	K15	3	A30	3	K12	3	A19	3	K18	3	A25	3	A20	3	B8	a	A24	3	D15	sdf	A22	3	A21	3	A18	323	A17	32	A16	32	F10	there was an error in D3 when I connected	A29	3	A23	3	A15	32	A14	32	A13	32	A28	3	A5	server	K19	3	G16	sdfsdf	D11	=32	C14	=G3 + 2	D4	=hello	A4	RAD	
+
+[ALL]: Message Received From 12: IsTyping	13	A0	

@@ -52,7 +52,7 @@ namespace CS3505
      * For example, if it recieves an EDIT, the controller will add those changes to the model, and then
      * call its send_all listener to inform all the clients of the change.
      */
-    void handle_message(message msg);
+    bool handle_message(message msg);
     /**
      * Registers a client identifier with the listener, so it can properly handle messages
      * pertaining to that client. 

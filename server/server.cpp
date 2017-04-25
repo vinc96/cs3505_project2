@@ -52,15 +52,28 @@ void server::message_received(std::string client_identifier, std::string message
 	}
       else
 	{
-	  controller->handle_message(parsed_msg);
+	  if (!controller->handle_message(parsed_msg))
+	    {
+	      //If we were told to kick the client, kick the client.
+	      log->log(string("Illegal message: ") + message_str, loglevel::WARNING);
+	      log->log(string("Kicking client: ") + client_identifier, loglevel::WARNING);
+	      networking->kick_client(client_identifier);
+	    }
 	}
     }
   else
     {
-      controller->handle_message(parsed_msg);
+      if (!controller->handle_message(parsed_msg))
+	{
+	  //If we were told to kick the client, kick the client.
+	  log->log(string("Illegal message: ") + message_str, loglevel::WARNING);
+	  log->log(string("Kicking client: ") + client_identifier, loglevel::WARNING);
+	  networking->kick_client(client_identifier);
+	}
     }
-
 }
+
+
 /*
  * The function that's called when a client's socket connection is lost (either through
  * disconnection, or network issues).
@@ -103,7 +116,7 @@ bool server::start()
       if (!networking->send_all(str_msg))
 	{
 	  logger::get_logger()->log(string("Message Failed to Send: ") + str_msg,
-				    loglevel::ERROR);
+				    loglevel::WARNING);
 	}
       else
 	{
@@ -116,7 +129,7 @@ bool server::start()
       if (!networking->send_message(str_msg, ident))
 	{
 	  logger::get_logger()->log(string("Message Failed to Send to: ") + ident +
-				    string(" Message: ") + str_msg, loglevel::ERROR);
+				    string(" Message: ") + str_msg, loglevel::WARNING);
 	}
       else
 	{
@@ -126,13 +139,6 @@ bool server::start()
     });
   //Log that the server started
   log->log("Server Started", loglevel::INFO);
-  /* //TEST CODE:
-  //Spam "Test i" to all sockets
-  for (int i = 0; i < 2000000000; i++)
-    {
-      networking->send_all("TEST");
-    }
-  */
   return true; 
 }
 
@@ -147,5 +153,5 @@ bool server::stop()
 
 bool server::is_running()
 {
-  return true; //Placeholder
+  return true;
 }
